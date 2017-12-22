@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://localhost:3306/gastosdb</property>
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <mapping class="com.gasto.model.Boleta"/>
+      <mapping class="com.gasto.model.BoletaPago"/>
+      <mapping class="com.gasto.model.Cotizacion"/>
+      <mapping class="com.gasto.model.CotizacionPago"/>
+      <mapping class="com.gasto.model.Cuenta"/>
+      <mapping class="com.gasto.model.Departamento"/>
+      <mapping class="com.gasto.model.DepartamentoPago"/>
+      <mapping class="com.gasto.model.Gastocomun"/>
+      <mapping class="com.gasto.model.Liquidacion"/>
+      <mapping class="com.gasto.model.MapaGastocomunDepartamento"/>
+      <mapping class="com.gasto.model.Personal"/>
+      <mapping class="com.gasto.model.PersonalContable"/>
+      <mapping class="com.gasto.model.PersonalSueldo"/>
+      <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>

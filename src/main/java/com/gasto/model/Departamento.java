@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Table(name = "departamento")
 public class Departamento {
     private int id;
     private String nombre;

@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
+@Table(name = "liquidacion")
 public class Liquidacion {
     private int id;
     private Timestamp fecha;

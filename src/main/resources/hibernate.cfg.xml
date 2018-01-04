@@ -6,6 +6,9 @@
   <session-factory>
     <property name="connection.url">jdbc:mysql://localhost:3306/gastosdb</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">patan81</property>
+
     <mapping class="com.gasto.model.Boleta"/>
       <mapping class="com.gasto.model.BoletaPago"/>
       <mapping class="com.gasto.model.Cotizacion"/>
@@ -19,8 +22,6 @@
       <mapping class="com.gasto.model.Personal"/>
       <mapping class="com.gasto.model.PersonalContable"/>
       <mapping class="com.gasto.model.PersonalSueldo"/>
-      <!-- <property name="connection.username"/> -->
-    <!-- <property name="connection.password"/> -->
 
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->

@@ -2,8 +2,10 @@ package com.gasto.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashMap;
 
 @Entity
+@Table(name = "cuenta")
 public class Cuenta {
     private int id;
     private String nombre;
@@ -40,29 +42,7 @@ public class Cuenta {
         this.tipo = tipo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Cuenta cuenta = (Cuenta) o;
-
-        if (id != cuenta.id) return false;
-        if (tipo != cuenta.tipo) return false;
-        if (nombre != null ? !nombre.equals(cuenta.nombre) : cuenta.nombre != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
-        result = 31 * result + tipo;
-        return result;
-    }
-
-    @OneToMany(mappedBy = "cuenta")
+    @OneToMany(mappedBy = "cuenta", fetch = FetchType.LAZY)
     public Collection<Boleta> getBoletas() {
         return boletas;
     }
@@ -70,4 +50,17 @@ public class Cuenta {
     public void setBoletas(Collection<Boleta> boletas) {
         this.boletas = boletas;
     }
+
+    private static HashMap<Integer, String> tipoNombres = new HashMap<Integer, String>();
+    static {
+        tipoNombres.put(0, "Cuentas");
+        tipoNombres.put(1, "Mantención");
+        tipoNombres.put(2, "Otros");
+    }
+
+    @Transient
+    public String getTipoNombre() {
+        return tipoNombres.get(this.tipo);
+    }
+
 }

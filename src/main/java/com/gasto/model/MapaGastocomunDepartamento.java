@@ -3,7 +3,7 @@ package com.gasto.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "mapa_gastocomun_departamento", schema = "gastosdb", catalog = "")
+@Table(name = "mapa_gastocomun_departamento")
 public class MapaGastocomunDepartamento {
     private int id;
     private int montoComun;

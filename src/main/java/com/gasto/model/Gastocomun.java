@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
+@Table(name = "gastocomun")
 public class Gastocomun {
     private int id;
     private Timestamp fecha;

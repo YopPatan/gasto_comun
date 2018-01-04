@@ -1,0 +1,14 @@
+.table-sm-aux {
+    font-size: .875rem !important;
+}
+
+.table-sm-aux th,
+.table-sm-aux td {
+    padding: .6rem;
+}
+
+.btn-sm-aux {
+    padding: .2rem .50rem;
+    margin-top: -3px;
+    margin-bottom: -3px;
+}

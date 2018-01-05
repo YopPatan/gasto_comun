@@ -12,8 +12,9 @@ public class Personal {
     private String apellidos;
     private String direccion;
     private int estado;
-    private Collection<PersonalContable> personalContables;
-    private Collection<Contrato> personalSueldos;
+
+    private Collection<PersonalPago> personalPagos;
+    private Collection<PersonalItem> personalItems;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -75,48 +76,22 @@ public class Personal {
         this.estado = estado;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Personal personal = (Personal) o;
-
-        if (id != personal.id) return false;
-        if (estado != personal.estado) return false;
-        if (nombres != null ? !nombres.equals(personal.nombres) : personal.nombres != null) return false;
-        if (apellidos != null ? !apellidos.equals(personal.apellidos) : personal.apellidos != null) return false;
-        if (direccion != null ? !direccion.equals(personal.direccion) : personal.direccion != null) return false;
-
-        return true;
+    @OneToMany(mappedBy = "personal")
+    public Collection<PersonalPago> getPersonalPagos() {
+        return personalPagos;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (nombres != null ? nombres.hashCode() : 0);
-        result = 31 * result + (apellidos != null ? apellidos.hashCode() : 0);
-        result = 31 * result + (direccion != null ? direccion.hashCode() : 0);
-        result = 31 * result + estado;
-        return result;
+    public void setPersonalPagos(Collection<PersonalPago> personalPagos) {
+        this.personalPagos = personalPagos;
     }
 
     @OneToMany(mappedBy = "personal")
-    public Collection<PersonalContable> getPersonalContables() {
-        return personalContables;
+    public Collection<PersonalItem> getPersonalItems() {
+        return personalItems;
     }
 
-    public void setPersonalContables(Collection<PersonalContable> personalContables) {
-        this.personalContables = personalContables;
-    }
-
-    @OneToMany(mappedBy = "personalByPersonalId")
-    public Collection<Contrato> getPersonalSueldos() {
-        return personalSueldos;
-    }
-
-    public void setPersonalSueldos(Collection<Contrato> personalSueldos) {
-        this.personalSueldos = personalSueldos;
+    public void setPersonalItems(Collection<PersonalItem> personalItems) {
+        this.personalItems = personalItems;
     }
 
 }

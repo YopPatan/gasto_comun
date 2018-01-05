@@ -32,24 +32,24 @@
         </div>
     </div>
 
-    <div class="card">
+    <div class="card" style="margin-bottom: 20px">
         <div class="card-header">
-            Contratos
+            Haberes / Descuentos
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#contratoModal" style="margin-bottom: 1rem;">Agregar nuevo</button>
-            <jsp:include page="partials/_contrato_table.jsp" />
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#personalItemModal" style="margin-bottom: 1rem;">Agregar nuevo</button>
+            <jsp:include page="partials/_personal_item_table.jsp" />
         </div>
     </div>
 
-    <jsp:include page="partials/_contrato_modal.jsp" />
+    <jsp:include page="partials/_personal_item_modal.jsp" />
 
-    <div class="card">
+    <div class="card" style="margin-bottom: 20px">
         <div class="card-header">
             Liquidaciones
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#contratoModal" style="margin-bottom: 1rem;">Generar nuevo</button>
+            <a href="/personal/${personal.id}/liquidacion/new" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</a>
             <jsp:include page="partials/_liquidacion_table.jsp" />
         </div>
     </div>

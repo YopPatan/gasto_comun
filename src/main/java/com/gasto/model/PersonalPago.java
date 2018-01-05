@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "personal_contable")
-public class PersonalContable {
+@Table(name = "personal_pago")
+public class PersonalPago {
     private int id;
     private Timestamp fecha;
     private int tipo;
@@ -62,32 +62,6 @@ public class PersonalContable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PersonalContable that = (PersonalContable) o;
-
-        if (id != that.id) return false;
-        if (tipo != that.tipo) return false;
-        if (monto != that.monto) return false;
-        if (fecha != null ? !fecha.equals(that.fecha) : that.fecha != null) return false;
-        if (descripcion != null ? !descripcion.equals(that.descripcion) : that.descripcion != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (fecha != null ? fecha.hashCode() : 0);
-        result = 31 * result + tipo;
-        result = 31 * result + monto;
-        result = 31 * result + (descripcion != null ? descripcion.hashCode() : 0);
-        return result;
     }
 
     @ManyToOne

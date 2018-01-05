@@ -1,16 +1,15 @@
 package com.gasto.model;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
-@Table(name = "cotizacion")
-public class Cotizacion {
+@Table(name = "liquidacion_item", schema = "gastosdb", catalog = "")
+public class LiquidacionItem {
     private int id;
     private int monto;
+    private String nombre;
     private int tipo;
     private Liquidacion liquidacion;
-    private Collection<CotizacionPago> cotizacionPagos;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -33,6 +32,16 @@ public class Cotizacion {
     }
 
     @Basic
+    @Column(name = "nombre", nullable = false, length = 255)
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Basic
     @Column(name = "tipo", nullable = false)
     public int getTipo() {
         return tipo;
@@ -42,27 +51,6 @@ public class Cotizacion {
         this.tipo = tipo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Cotizacion that = (Cotizacion) o;
-
-        if (id != that.id) return false;
-        if (monto != that.monto) return false;
-        if (tipo != that.tipo) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + monto;
-        result = 31 * result + tipo;
-        return result;
-    }
 
     @ManyToOne
     @JoinColumn(name = "liquidacion_id", referencedColumnName = "id", nullable = false)
@@ -72,14 +60,5 @@ public class Cotizacion {
 
     public void setLiquidacion(Liquidacion liquidacion) {
         this.liquidacion = liquidacion;
-    }
-
-    @OneToMany(mappedBy = "cotizacion")
-    public Collection<CotizacionPago> getCotizacionPagos() {
-        return cotizacionPagos;
-    }
-
-    public void setCotizacionPagos(Collection<CotizacionPago> cotizacionPagos) {
-        this.cotizacionPagos = cotizacionPagos;
     }
 }

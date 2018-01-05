@@ -10,9 +10,12 @@ public class Liquidacion {
     private int id;
     private Timestamp fecha;
     private String adjunto;
-    private Collection<Cotizacion> cotizaciones;
+    private int montoHaberes;
+    private int montoDescuentos;
+    private int montoLiquido;
     private Gastocomun gastocomun;
-    private Collection<PersonalContable> personalContables;
+    private Collection<PersonalPago> personalPagos;
+    private Collection<LiquidacionItem> liquidacionItems;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -44,35 +47,34 @@ public class Liquidacion {
         this.adjunto = adjunto;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Liquidacion that = (Liquidacion) o;
-
-        if (id != that.id) return false;
-        if (fecha != null ? !fecha.equals(that.fecha) : that.fecha != null) return false;
-        if (adjunto != null ? !adjunto.equals(that.adjunto) : that.adjunto != null) return false;
-
-        return true;
+    @Basic
+    @Column(name = "monto_haberes", nullable = false)
+    public int getMontoHaberes() {
+        return montoHaberes;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (fecha != null ? fecha.hashCode() : 0);
-        result = 31 * result + (adjunto != null ? adjunto.hashCode() : 0);
-        return result;
+    public void setMontoHaberes(int montoHaberes) {
+        this.montoHaberes = montoHaberes;
     }
 
-    @OneToMany(mappedBy = "liquidacion")
-    public Collection<Cotizacion> getCotizaciones() {
-        return cotizaciones;
+    @Basic
+    @Column(name = "monto_descuentos", nullable = false)
+    public int getMontoDescuentos() {
+        return montoDescuentos;
     }
 
-    public void setCotizaciones(Collection<Cotizacion> cotizaciones) {
-        this.cotizaciones = cotizaciones;
+    public void setMontoDescuentos(int montoDescuentos) {
+        this.montoDescuentos = montoDescuentos;
+    }
+
+    @Basic
+    @Column(name = "monto_liquido", nullable = false)
+    public int getMontoLiquido() {
+        return montoLiquido;
+    }
+
+    public void setMontoLiquido(int montoLiquido) {
+        this.montoLiquido = montoLiquido;
     }
 
     @ManyToOne
@@ -86,11 +88,20 @@ public class Liquidacion {
     }
 
     @OneToMany(mappedBy = "liquidacion")
-    public Collection<PersonalContable> getPersonalContables() {
-        return personalContables;
+    public Collection<PersonalPago> getPersonalPagos() {
+        return personalPagos;
     }
 
-    public void setPersonalContables(Collection<PersonalContable> personalContables) {
-        this.personalContables = personalContables;
+    public void setPersonalPagos(Collection<PersonalPago> personalPagos) {
+        this.personalPagos = personalPagos;
+    }
+
+    @OneToMany(mappedBy = "liquidacion")
+    public Collection<LiquidacionItem> getLiquidacionItems() {
+        return liquidacionItems;
+    }
+
+    public void setLiquidacionItems(Collection<LiquidacionItem> liquidacionItems) {
+        this.liquidacionItems = liquidacionItems;
     }
 }

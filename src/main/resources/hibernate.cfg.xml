@@ -6,10 +6,8 @@
   <session-factory>
     <property name="connection.url">jdbc:mysql://localhost:3306/gastosdb</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="connection.username">root</property>
-    <property name="connection.password">patan81</property>
 
-    <mapping class="com.gasto.model.Boleta"/>
+      <mapping class="com.gasto.model.Boleta"/>
       <mapping class="com.gasto.model.BoletaPago"/>
       <mapping class="com.gasto.model.Cotizacion"/>
       <mapping class="com.gasto.model.CotizacionPago"/>
@@ -20,10 +18,12 @@
       <mapping class="com.gasto.model.Liquidacion"/>
       <mapping class="com.gasto.model.MapaGastocomunDepartamento"/>
       <mapping class="com.gasto.model.Personal"/>
-      <mapping class="com.gasto.model.PersonalContable"/>
+      <mapping class="com.gasto.model.PersonalPago"/>
       <mapping class="com.gasto.model.Contrato"/>
+      <mapping class="com.gasto.model.LiquidacionItem"/>
+      <mapping class="com.gasto.model.PersonalItem"/>
 
-    <!-- DB schema will be updated if needed -->
+      <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>
 </hibernate-configuration>

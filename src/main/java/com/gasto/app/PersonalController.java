@@ -1,6 +1,7 @@
 package com.gasto.app;
 
 import com.gasto.model.Personal;
+import com.gasto.repository.PersonalItemRepository;
 import com.gasto.repository.PersonalRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,10 @@ public class PersonalController {
     @Resource
     private PersonalRepository personalRepository;
 
+    @Resource
+    private PersonalItemRepository personalItemRepository;
+
+
     @RequestMapping()
     public String findAll(Model model) {
         model.addAttribute("personals", personalRepository.findAll());
@@ -31,6 +36,8 @@ public class PersonalController {
     @RequestMapping("/edit/{personalId}")
     public String update(@PathVariable("personalId") Integer personalId, Model model) {
         model.addAttribute("personal", personalRepository.findById(personalId).get());
+        model.addAttribute("personalItemHaberes", personalItemRepository.findByPersonalIdAndTipo(personalId, 1));
+        model.addAttribute("personalItemDescuentos", personalItemRepository.findByPersonalIdAndTipo(personalId, 2));
         return "personal_detail";
     }
 

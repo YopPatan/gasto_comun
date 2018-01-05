@@ -1,6 +1,5 @@
 package com.gasto.app;
 
-import com.gasto.model.Boleta;
 import com.gasto.model.Cuenta;
 import com.gasto.repository.BoletaRepository;
 import com.gasto.repository.CuentaRepository;
@@ -30,7 +29,7 @@ public class CuentaController {
 
     @RequestMapping("/new")
     public String create(Model model) {
-        return "cuenta_edit";
+        return "cuenta_detail";
     }
 
     @RequestMapping("/edit/{cuentaId}")
@@ -38,7 +37,7 @@ public class CuentaController {
         model.addAttribute("cuenta", cuentaRepository.findById(cuentaId).get());
         // No llamo a cuenta.getBoletas() porque JPA no es Lizzy
         model.addAttribute("boletas", boletaRepository.findByCuentaId(cuentaId));
-        return "cuenta_edit";
+        return "cuenta_detail";
     }
 
     @RequestMapping("/save")

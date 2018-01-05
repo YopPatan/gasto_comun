@@ -6,7 +6,7 @@
                 <a class="nav-link" href="/cuenta">Cuentas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Personal</a>
+                <a class="nav-link" href="/personal">Personal</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Departamentos</a>

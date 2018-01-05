@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "personal_sueldo")
-public class PersonalSueldo {
+@Table(name = "contrato")
+public class Contrato {
     private int id;
     private Timestamp fecha;
     private int montoBruto;
@@ -90,7 +90,7 @@ public class PersonalSueldo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PersonalSueldo that = (PersonalSueldo) o;
+        Contrato that = (Contrato) o;
 
         if (id != that.id) return false;
         if (montoBruto != that.montoBruto) return false;

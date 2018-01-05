@@ -25,14 +25,14 @@ public class BoletaController {
     @RequestMapping("/new")
     public String create(@PathVariable("cuentaId") Integer cuentaId, Model model) {
         model.addAttribute("cuentaId", cuentaId);
-        return "boleta_edit";
+        return "boleta_detail";
     }
 
     @RequestMapping("/edit/{boletaId}")
     public String update(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaId") Integer boletaId, Model model) {
         model.addAttribute("cuentaId", cuentaId);
         model.addAttribute("boleta", boletaRepository.findById(boletaId).get());
-        return "boleta_edit";
+        return "boleta_detail";
     }
 
     @RequestMapping("/save")
@@ -53,6 +53,6 @@ public class BoletaController {
         boleta.setAdjunto(request.getParameter("boleta_adjunto"));
         boleta.setMonto(Integer.parseInt(request.getParameter("boleta_monto")));
         boletaRepository.save(boleta);
-        return "cuenta_edit";
+        return "cuenta_detail";
     }
 }

@@ -21,7 +21,7 @@
       <mapping class="com.gasto.model.MapaGastocomunDepartamento"/>
       <mapping class="com.gasto.model.Personal"/>
       <mapping class="com.gasto.model.PersonalContable"/>
-      <mapping class="com.gasto.model.PersonalSueldo"/>
+      <mapping class="com.gasto.model.Contrato"/>
 
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->

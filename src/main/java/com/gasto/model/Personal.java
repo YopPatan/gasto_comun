@@ -7,12 +7,13 @@ import java.util.Collection;
 @Table(name = "personal")
 public class Personal {
     private int id;
+    private String rut;
     private String nombres;
     private String apellidos;
     private String direccion;
     private int estado;
     private Collection<PersonalContable> personalContables;
-    private Collection<PersonalSueldo> personalSueldos;
+    private Collection<Contrato> personalSueldos;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -22,6 +23,16 @@ public class Personal {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "rut", nullable = false, length = 255)
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
     }
 
     @Basic
@@ -100,11 +111,12 @@ public class Personal {
     }
 
     @OneToMany(mappedBy = "personalByPersonalId")
-    public Collection<PersonalSueldo> getPersonalSueldos() {
+    public Collection<Contrato> getPersonalSueldos() {
         return personalSueldos;
     }
 
-    public void setPersonalSueldos(Collection<PersonalSueldo> personalSueldos) {
+    public void setPersonalSueldos(Collection<Contrato> personalSueldos) {
         this.personalSueldos = personalSueldos;
     }
+
 }

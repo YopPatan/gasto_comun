@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BoletaRepository extends CrudRepository<Boleta, Integer> {
     List<Boleta> findByCuentaId(Integer cuentaId);
+    List<Boleta> findByEstado(Integer estado);
 }

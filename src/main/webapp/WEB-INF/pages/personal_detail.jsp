@@ -13,11 +13,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
 
     <link rel="stylesheet" type="text/css" media="screen" href="/resources/css/main.css" />
+
+    <script>
+        function loadPersonalItemModal(url) {
+            $.get(url, function (data) {
+                $("#personalItemModalContent").children().remove();
+                $("#personalItemModalContent").append(data);
+                $('#personalItemModal').modal();
+            });
+        }
+
+        function loadLiquidacionModal(url) {
+            $.get(url, function (data) {
+                $("#liquidacionModalContent").children().remove();
+                $("#liquidacionModalContent").append(data);
+                $('#liquidacionModal').modal();
+            });
+        }
+    </script>
 
 </head>
 <body>
@@ -37,20 +56,32 @@
             Haberes / Descuentos
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#personalItemModal" style="margin-bottom: 1rem;">Agregar nuevo</button>
+            <button type="button" onclick="loadPersonalItemModal('/personal/${personal.id}/item/new')" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</button>
             <jsp:include page="partials/_personal_item_table.jsp" />
         </div>
     </div>
 
-    <jsp:include page="partials/_personal_item_modal.jsp" />
+    <div id="personalItemModalContent"></div>
 
     <div class="card" style="margin-bottom: 20px">
         <div class="card-header">
             Liquidaciones
         </div>
         <div class="card-body">
-            <a href="/personal/${personal.id}/liquidacion/new" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</a>
+            <button type="button" onclick="loadLiquidacionModal('/personal/${personal.id}/liquidacion/new')" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</button>
             <jsp:include page="partials/_liquidacion_table.jsp" />
+        </div>
+    </div>
+
+    <div id="liquidacionModalContent"></div>
+
+    <div class="card" style="margin-bottom: 20px">
+        <div class="card-header">
+            Pagos
+        </div>
+        <div class="card-body">
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#personalPagoModal" style="margin-bottom: 1rem;">Agregar nuevo</button>
+            <jsp:include page="partials/_personal_pago_table.jsp" />
         </div>
     </div>
 

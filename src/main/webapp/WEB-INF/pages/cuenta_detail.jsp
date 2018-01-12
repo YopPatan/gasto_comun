@@ -13,16 +13,37 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" media="screen" href="/resources/css/main.css" />
 
+    <script>
+        function loadBoletaModal(url) {
+            $.get(url, function (data) {
+                $("#boletaModalContent").children().remove();
+                $("#boletaModalContent").append(data);
+                $('#boletaModal').modal();
+            });
+        }
+
+        function loadBoletaPagoModal(url) {
+            $.get(url, function (data) {
+                console.log(url);
+                console.log(data);
+                $("#boletaPagoModalContent").children().remove();
+                $("#boletaPagoModalContent").append(data);
+                $('#boletaPagoModal').modal();
+            });
+        }
+    </script>
+
 </head>
 <body>
 
 <jsp:include page="partials/_menu.jsp" />
+<jsp:include page="partials/_attached_modal.jsp" />
 
 <div class="container">
     <div class="card" style="margin-bottom: 20px">
@@ -32,15 +53,32 @@
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            Boletas
+    <c:if test="${cuenta != null}">
+        <div class="card" style="margin-bottom: 20px">
+            <div class="card-header">
+                Boletas
+            </div>
+            <div class="card-body">
+                <button type="button" onclick="loadBoletaModal('/cuenta/${cuenta.id}/boleta/new')" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</button>
+                <jsp:include page="partials/_boleta_table.jsp" />
+            </div>
         </div>
-        <div class="card-body">
-            <a href="/cuenta/${cuenta.id}/boleta/new" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</a>
-            <jsp:include page="partials/_boleta_table.jsp" />
+
+        <div id="boletaModalContent"></div>
+
+        <div class="card">
+            <div class="card-header">
+                Pagos
+            </div>
+            <div class="card-body">
+                <button type="button" onclick="loadBoletaPagoModal('/cuenta/${cuenta.id}/boletaPago/new')" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</button>
+                <jsp:include page="partials/_boleta_pago_table.jsp" />
+            </div>
         </div>
-    </div>
+
+        <div id="boletaPagoModalContent"></div>
+    </c:if>
+
 </div>
 
 </body>

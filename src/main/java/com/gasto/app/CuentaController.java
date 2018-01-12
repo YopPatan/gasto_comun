@@ -1,6 +1,7 @@
 package com.gasto.app;
 
 import com.gasto.model.Cuenta;
+import com.gasto.repository.BoletaPagoRepository;
 import com.gasto.repository.BoletaRepository;
 import com.gasto.repository.CuentaRepository;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class CuentaController {
     @Resource
     private BoletaRepository boletaRepository;
 
+    @Resource
+    private BoletaPagoRepository boletaPagoRepository;
+
     @RequestMapping()
     public String findAll(Model model) {
         model.addAttribute("cuentas", cuentaRepository.findAll());
@@ -37,6 +41,7 @@ public class CuentaController {
         model.addAttribute("cuenta", cuentaRepository.findById(cuentaId).get());
         // No llamo a cuenta.getBoletas() porque JPA no es Lizzy
         model.addAttribute("boletas", boletaRepository.findByCuentaId(cuentaId));
+        model.addAttribute("boletaPagos", boletaPagoRepository.findByBoletaCuentaId(cuentaId));
         return "cuenta_detail";
     }
 
@@ -54,6 +59,13 @@ public class CuentaController {
         cuenta.setNombre(request.getParameter("cuenta_nombre"));
         cuenta.setTipo(Integer.parseInt(request.getParameter("cuenta_tipo")));
         cuentaRepository.save(cuenta);
+        return "redirect:/cuenta";
+    }
+
+    @RequestMapping("/delete/{cuentaId}")
+    public String save(@PathVariable("cuentaId") Integer cuentaId, Model model, HttpServletRequest request) {
+        Cuenta cuenta = cuentaRepository.findById(cuentaId).get();
+        cuentaRepository.delete(cuenta);
         return "redirect:/cuenta";
     }
 }

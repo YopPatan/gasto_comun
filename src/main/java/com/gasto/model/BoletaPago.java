@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 public class BoletaPago {
     private int id;
     private Timestamp fecha;
+    private String adjunto;
     private int cuota;
     private int monto;
     private Gastocomun gastocomun;
@@ -34,6 +35,16 @@ public class BoletaPago {
     }
 
     @Basic
+    @Column(name = "adjunto", nullable = true, length = 255)
+    public String getAdjunto() {
+        return adjunto;
+    }
+
+    public void setAdjunto(String adjunto) {
+        this.adjunto = adjunto;
+    }
+
+    @Basic
     @Column(name = "cuota", nullable = false)
     public int getCuota() {
         return cuota;
@@ -51,30 +62,6 @@ public class BoletaPago {
 
     public void setMonto(int monto) {
         this.monto = monto;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        BoletaPago that = (BoletaPago) o;
-
-        if (id != that.id) return false;
-        if (cuota != that.cuota) return false;
-        if (monto != that.monto) return false;
-        if (fecha != null ? !fecha.equals(that.fecha) : that.fecha != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (fecha != null ? fecha.hashCode() : 0);
-        result = 31 * result + cuota;
-        result = 31 * result + monto;
-        return result;
     }
 
     @ManyToOne

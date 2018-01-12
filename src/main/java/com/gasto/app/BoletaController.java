@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
+import java.text.ParseException;
 
 @Controller
 @RequestMapping("/cuenta/{cuentaId}/boleta")
@@ -25,18 +27,19 @@ public class BoletaController {
     @RequestMapping("/new")
     public String create(@PathVariable("cuentaId") Integer cuentaId, Model model) {
         model.addAttribute("cuentaId", cuentaId);
-        return "boleta_detail";
+        return "partials/_boleta_modal";
     }
 
     @RequestMapping("/edit/{boletaId}")
+    /*@ResponseBody*/
     public String update(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaId") Integer boletaId, Model model) {
         model.addAttribute("cuentaId", cuentaId);
         model.addAttribute("boleta", boletaRepository.findById(boletaId).get());
-        return "boleta_detail";
+        return "partials/_boleta_modal";
     }
 
     @RequestMapping("/save")
-    public String save(@PathVariable("cuentaId") Integer cuentaId, Model model, HttpServletRequest request) {
+    public String save(@PathVariable("cuentaId") Integer cuentaId, Model model, HttpServletRequest request) throws ParseException {
         Boleta boleta;
         if (request.getParameter("boleta_id") != null) {
             Integer boletaId = Integer.parseInt(request.getParameter("boleta_id"));
@@ -49,10 +52,18 @@ public class BoletaController {
             boleta.setCuenta(cuenta);
         }
 
-        boleta.setFolio(request.getParameter("boleta_adjunto"));
+        boleta.setFecha(Timestamp.valueOf(request.getParameter("boleta_fecha") + " 00:00:00"));
+        boleta.setFolio(request.getParameter("boleta_folio"));
         boleta.setAdjunto(request.getParameter("boleta_adjunto"));
         boleta.setMonto(Integer.parseInt(request.getParameter("boleta_monto")));
         boletaRepository.save(boleta);
-        return "cuenta_detail";
+        return "redirect:/cuenta/edit/" + cuentaId;
+    }
+
+    @RequestMapping("/delete/{boletaId}")
+    public String save(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaId") Integer boletaId, Model model, HttpServletRequest request) {
+        Boleta boleta = boletaRepository.findById(boletaId).get();
+        boletaRepository.delete(boleta);
+        return "redirect:/cuenta/edit/" + cuentaId;
     }
 }

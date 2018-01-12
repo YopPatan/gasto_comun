@@ -1,15 +1,19 @@
 package com.gasto.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.HashMap;
 
 @Entity
 @Table(name = "boleta")
 public class Boleta {
     private int id;
+    private Timestamp fecha;
     private String folio;
-    private int monto;
     private String adjunto;
+    private int estado;
+    private int monto;
     private Cuenta cuenta;
     private Collection<BoletaPago> boletaPagos;
 
@@ -24,6 +28,16 @@ public class Boleta {
     }
 
     @Basic
+    @Column(name = "fecha", nullable = false)
+    public Timestamp getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
+    }
+
+    @Basic
     @Column(name = "folio", nullable = false, length = 255)
     public String getFolio() {
         return folio;
@@ -34,17 +48,7 @@ public class Boleta {
     }
 
     @Basic
-    @Column(name = "monto", nullable = false)
-    public int getMonto() {
-        return monto;
-    }
-
-    public void setMonto(int monto) {
-        this.monto = monto;
-    }
-
-    @Basic
-    @Column(name = "adjunto", nullable = false, length = 255)
+    @Column(name = "adjunto", nullable = true, length = 255)
     public String getAdjunto() {
         return adjunto;
     }
@@ -53,28 +57,24 @@ public class Boleta {
         this.adjunto = adjunto;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Boleta boleta = (Boleta) o;
-
-        if (id != boleta.id) return false;
-        if (monto != boleta.monto) return false;
-        if (folio != null ? !folio.equals(boleta.folio) : boleta.folio != null) return false;
-        if (adjunto != null ? !adjunto.equals(boleta.adjunto) : boleta.adjunto != null) return false;
-
-        return true;
+    @Basic
+    @Column(name = "estado", nullable = false)
+    public int getEstado() {
+        return estado;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (folio != null ? folio.hashCode() : 0);
-        result = 31 * result + monto;
-        result = 31 * result + (adjunto != null ? adjunto.hashCode() : 0);
-        return result;
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    @Basic
+    @Column(name = "monto", nullable = false)
+    public int getMonto() {
+        return monto;
+    }
+
+    public void setMonto(int monto) {
+        this.monto = monto;
     }
 
     @ManyToOne
@@ -94,5 +94,21 @@ public class Boleta {
 
     public void setBoletaPagos(Collection<BoletaPago> boletaPagos) {
         this.boletaPagos = boletaPagos;
+    }
+
+    private static HashMap<Integer, String> estadoNombres = new HashMap<Integer, String>();
+    static {
+        estadoNombres.put(0, "Adeudado");
+        estadoNombres.put(1, "Pagado");
+    }
+
+    @Transient
+    public String getEstadoNombre() {
+        return estadoNombres.get(this.estado);
+    }
+
+    @Transient
+    public HashMap<Integer, String> getEstadoNombres() {
+        return estadoNombres;
     }
 }

@@ -63,4 +63,9 @@ public class Cuenta {
         return tipoNombres.get(this.tipo);
     }
 
+    @Transient
+    public HashMap<Integer, String> getTipoNombres() {
+        return tipoNombres;
+    }
+
 }

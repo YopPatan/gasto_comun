@@ -22,6 +22,21 @@ public class PersonalItemController {
     @Resource
     private PersonalItemRepository personalItemRepository;
 
+
+    @RequestMapping("/new")
+    public String create(@PathVariable("personalId") Integer personalId, Model model) {
+        model.addAttribute("personalId", personalId);
+        return "partials/_personal_item_modal";
+    }
+
+    @RequestMapping("/edit/{personalItemId}")
+    /*@ResponseBody*/
+    public String update(@PathVariable("personalId") Integer personalId, @PathVariable("personalItemId") Integer personalItemId, Model model) {
+        model.addAttribute("personalId", personalId);
+        model.addAttribute("personalItem", personalItemRepository.findById(personalItemId).get());
+        return "partials/_personal_item_modal";
+    }
+
     @RequestMapping("/save")
     public String save(@PathVariable("personalId") Integer personalId, Model model, HttpServletRequest request) {
         PersonalItem personalItem;
@@ -38,8 +53,16 @@ public class PersonalItemController {
 
         personalItem.setNombre(request.getParameter("personal_item_nombre"));
         personalItem.setTipo(Integer.parseInt(request.getParameter("personal_item_tipo")));
+        personalItem.setEsPorcentaje(Integer.parseInt(request.getParameter("personal_es_porcentaje")));
         personalItem.setMonto(Double.parseDouble(request.getParameter("personal_item_monto")));
         personalItemRepository.save(personalItem);
+        return "redirect:/personal/edit/" + personalId;
+    }
+
+    @RequestMapping("/delete/{personalItemId}")
+    public String save(@PathVariable("personalId") Integer personalId, @PathVariable("personalItemId") Integer personalItemId, Model model, HttpServletRequest request) {
+        PersonalItem personalItem = personalItemRepository.findById(personalItemId).get();
+        personalItemRepository.delete(personalItem);
         return "redirect:/personal/edit/" + personalId;
     }
 }

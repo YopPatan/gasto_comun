@@ -38,6 +38,7 @@ public class CuentaController {
 
     @RequestMapping("/edit/{cuentaId}")
     public String update(@PathVariable("cuentaId") Integer cuentaId, Model model) {
+        model.addAttribute("cuentaId", cuentaId);
         model.addAttribute("cuenta", cuentaRepository.findById(cuentaId).get());
         // No llamo a cuenta.getBoletas() porque JPA no es Lizzy
         model.addAttribute("boletas", boletaRepository.findByCuentaId(cuentaId));
@@ -63,7 +64,7 @@ public class CuentaController {
     }
 
     @RequestMapping("/delete/{cuentaId}")
-    public String save(@PathVariable("cuentaId") Integer cuentaId, Model model, HttpServletRequest request) {
+    public String delete(@PathVariable("cuentaId") Integer cuentaId, Model model, HttpServletRequest request) {
         Cuenta cuenta = cuentaRepository.findById(cuentaId).get();
         cuentaRepository.delete(cuenta);
         return "redirect:/cuenta";

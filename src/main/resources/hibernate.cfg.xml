@@ -22,6 +22,7 @@
       <mapping class="com.gasto.model.Contrato"/>
       <mapping class="com.gasto.model.LiquidacionItem"/>
       <mapping class="com.gasto.model.PersonalItem"/>
+      <mapping class="com.gasto.model.PersonalTurno"/>
 
       <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->

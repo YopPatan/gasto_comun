@@ -11,10 +11,12 @@ public class Personal {
     private String nombres;
     private String apellidos;
     private String direccion;
+    private String cargo;
     private int estado;
 
     private Collection<PersonalPago> personalPagos;
     private Collection<PersonalItem> personalItems;
+    private Collection<PersonalTurno> personalTurnos;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -67,6 +69,16 @@ public class Personal {
     }
 
     @Basic
+    @Column(name = "cargo", nullable = false, length = 255)
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    @Basic
     @Column(name = "estado", nullable = false)
     public int getEstado() {
         return estado;
@@ -92,6 +104,15 @@ public class Personal {
 
     public void setPersonalItems(Collection<PersonalItem> personalItems) {
         this.personalItems = personalItems;
+    }
+
+    @OneToMany(mappedBy = "personal")
+    public Collection<PersonalTurno> getPersonalTurnos() {
+        return personalTurnos;
+    }
+
+    public void setPersonalTurnos(Collection<PersonalTurno> personalTurnos) {
+        this.personalTurnos = personalTurnos;
     }
 
 }

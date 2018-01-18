@@ -60,7 +60,7 @@ public class PersonalItemController {
     }
 
     @RequestMapping("/delete/{personalItemId}")
-    public String save(@PathVariable("personalId") Integer personalId, @PathVariable("personalItemId") Integer personalItemId, Model model, HttpServletRequest request) {
+    public String delete(@PathVariable("personalId") Integer personalId, @PathVariable("personalItemId") Integer personalItemId, Model model, HttpServletRequest request) {
         PersonalItem personalItem = personalItemRepository.findById(personalItemId).get();
         personalItemRepository.delete(personalItem);
         return "redirect:/personal/edit/" + personalId;

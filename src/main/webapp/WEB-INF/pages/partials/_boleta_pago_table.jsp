@@ -10,8 +10,8 @@
         <th scope="col">Fecha</th>
         <th scope="col">Adjunto</th>
         <th scope="col">Monto</th>
-        <th scope="col" width="80"></th>
-        <th scope="col" width="80"></th>
+        <th scope="col" width="60"></th>
+        <th scope="col" width="60"></th>
     </tr>
     </thead>
     <tbody>

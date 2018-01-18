@@ -36,6 +36,14 @@
                 $('#liquidacionModal').modal();
             });
         }
+
+        function loadPersonalPagoModal(url) {
+            $.get(url, function (data) {
+                $("#personalPagoModalContent").children().remove();
+                $("#personalPagoModalContent").append(data);
+                $('#personalPagoModal').modal();
+            });
+        }
     </script>
 
 </head>
@@ -80,10 +88,12 @@
             Pagos
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#personalPagoModal" style="margin-bottom: 1rem;">Agregar nuevo</button>
+            <button type="button" onclick="loadPersonalPagoModal('/personal/${personal.id}/pago/new')" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</button>
             <jsp:include page="partials/_personal_pago_table.jsp" />
         </div>
     </div>
+
+    <div id="personalPagoModalContent"></div>
 
 </div>
 

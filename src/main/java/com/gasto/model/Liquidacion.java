@@ -9,16 +9,20 @@ import java.util.Collection;
 public class Liquidacion {
     private int id;
     private Timestamp fecha;
-    private String adjunto;
-    private int montoHaberes;
+    /*private String adjunto;*/
+    private int montoImponible;
+    private int montoNoImponible;
     private int montoDescuentos;
     private int montoLiquido;
+    private int diasTrabajados;
     private Gastocomun gastocomun;
+    private Personal personal;
     private Collection<PersonalPago> personalPagos;
     private Collection<LiquidacionItem> liquidacionItems;
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -37,7 +41,7 @@ public class Liquidacion {
         this.fecha = fecha;
     }
 
-    @Basic
+    /*@Basic
     @Column(name = "adjunto", nullable = false, length = 255)
     public String getAdjunto() {
         return adjunto;
@@ -45,16 +49,26 @@ public class Liquidacion {
 
     public void setAdjunto(String adjunto) {
         this.adjunto = adjunto;
+    }*/
+
+    @Basic
+    @Column(name = "monto_imponible", nullable = false)
+    public int getMontoImponible() {
+        return montoImponible;
+    }
+
+    public void setMontoImponible(int montoImponible) {
+        this.montoImponible = montoImponible;
     }
 
     @Basic
-    @Column(name = "monto_haberes", nullable = false)
-    public int getMontoHaberes() {
-        return montoHaberes;
+    @Column(name = "monto_no_imponible", nullable = false)
+    public int getMontoNoImponible() {
+        return montoNoImponible;
     }
 
-    public void setMontoHaberes(int montoHaberes) {
-        this.montoHaberes = montoHaberes;
+    public void setMontoNoImponible(int montoNoImponible) {
+        this.montoNoImponible = montoNoImponible;
     }
 
     @Basic
@@ -77,6 +91,16 @@ public class Liquidacion {
         this.montoLiquido = montoLiquido;
     }
 
+    @Basic
+    @Column(name = "dias_trabajados", nullable = false)
+    public int getDiasTrabajados() {
+        return diasTrabajados;
+    }
+
+    public void setDiasTrabajados(int diasTrabajados) {
+        this.diasTrabajados = diasTrabajados;
+    }
+
     @ManyToOne
     @JoinColumn(name = "gastocomun_id", referencedColumnName = "id")
     public Gastocomun getGastocomun() {
@@ -85,6 +109,16 @@ public class Liquidacion {
 
     public void setGastocomun(Gastocomun gastocomun) {
         this.gastocomun = gastocomun;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "personal_id", referencedColumnName = "id", nullable = false)
+    public Personal getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
     }
 
     @OneToMany(mappedBy = "liquidacion")
@@ -104,4 +138,5 @@ public class Liquidacion {
     public void setLiquidacionItems(Collection<LiquidacionItem> liquidacionItems) {
         this.liquidacionItems = liquidacionItems;
     }
+
 }

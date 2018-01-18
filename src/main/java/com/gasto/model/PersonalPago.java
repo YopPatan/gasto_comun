@@ -2,6 +2,7 @@ package com.gasto.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
 @Entity
 @Table(name = "personal_pago")
@@ -10,7 +11,6 @@ public class PersonalPago {
     private Timestamp fecha;
     private int tipo;
     private int monto;
-    private String descripcion;
     private Personal personal;
     private Liquidacion liquidacion;
 
@@ -54,16 +54,6 @@ public class PersonalPago {
         this.monto = monto;
     }
 
-    @Basic
-    @Column(name = "descripcion", nullable = false, length = -1)
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     @ManyToOne
     @JoinColumn(name = "personal_id", referencedColumnName = "id", nullable = false)
     public Personal getPersonal() {
@@ -82,5 +72,21 @@ public class PersonalPago {
 
     public void setLiquidacion(Liquidacion liquidacion) {
         this.liquidacion = liquidacion;
+    }
+
+    private static HashMap<Integer, String> tipoNombres = new HashMap<Integer, String>();
+    static {
+        tipoNombres.put(1, "Remuneración");
+        tipoNombres.put(2, "Anticipo");
+    }
+
+    @Transient
+    public String getTipoNombre() {
+        return tipoNombres.get(this.tipo);
+    }
+
+    @Transient
+    public HashMap<Integer, String> getTipoNombres() {
+        return tipoNombres;
     }
 }

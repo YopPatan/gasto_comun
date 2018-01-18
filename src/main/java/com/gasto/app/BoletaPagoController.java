@@ -63,7 +63,7 @@ public class BoletaPagoController {
     }
 
     @RequestMapping("/delete/{boletaPagoId}")
-    public String save(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaPagoId") Integer boletaPagoId, Model model, HttpServletRequest request) {
+    public String delete(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaPagoId") Integer boletaPagoId, Model model, HttpServletRequest request) {
         BoletaPago boletaPago = boletaPagoRepository.findById(boletaPagoId).get();
         boletaPagoRepository.delete(boletaPago);
         return "redirect:/cuenta/edit/" + cuentaId;

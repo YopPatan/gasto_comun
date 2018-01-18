@@ -9,8 +9,9 @@
         <th scope="col">Nombres</th>
         <th scope="col">Apellidos</th>
         <th scope="col">Rut</th>
-        <th scope="col" width="80"></th>
-        <th scope="col" width="80"></th>
+        <th scope="col">Cargo</th>
+        <th scope="col" width="60"></th>
+        <th scope="col" width="60"></th>
     </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
             <td>${personal.nombres}</td>
             <td>${personal.apellidos}</td>
             <td>${personal.rut}</td>
+            <td>${personal.cargo}</td>
             <td><a href="/personal/edit/${personal.id}" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
             <td><a href="/personal/delete/${personal.id}" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
         </tr>

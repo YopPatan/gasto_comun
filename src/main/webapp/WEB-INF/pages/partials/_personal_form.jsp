@@ -5,7 +5,7 @@
 
 <form:form action="/personal/save" id="personalForm">
     <c:if test="${personal != null}">
-        <input type="hidden" name="cuenta_id" value="${personal.id}" />
+        <input type="hidden" name="personal_id" value="${personal.id}" />
     </c:if>
     <div class="form-group row">
         <label for="personal_rut" class="col-sm-2 col-form-label col-form-label-sm">Rut</label>
@@ -29,6 +29,12 @@
         <label for="personal_direccion" class="col-sm-2 col-form-label col-form-label-sm">Dirección</label>
         <div class="col-sm-10">
             <input value="${personal.direccion}" class="form-control form-control-sm" id="personal_direccion" name="personal_direccion" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="personal_cargo" class="col-sm-2 col-form-label col-form-label-sm">Cargo</label>
+        <div class="col-sm-10">
+            <input value="${personal.cargo}" class="form-control form-control-sm" id="personal_cargo" name="personal_cargo" />
         </div>
     </div>
     <div class="form-group row">

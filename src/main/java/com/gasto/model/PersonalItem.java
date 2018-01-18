@@ -75,8 +75,9 @@ public class PersonalItem {
 
     private static HashMap<Integer, String> tipoNombres = new HashMap<Integer, String>();
     static {
-        tipoNombres.put(1, "Haberes");
-        tipoNombres.put(2, "Descuentos");
+        tipoNombres.put(1, "Imponibles");
+        tipoNombres.put(2, "No Imponibles");
+        tipoNombres.put(3, "Descuentos");
     }
 
     @Transient

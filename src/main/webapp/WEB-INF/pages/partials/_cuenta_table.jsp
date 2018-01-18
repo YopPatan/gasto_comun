@@ -8,8 +8,8 @@
         <th scope="col" width="50" style="text-align: center">#</th>
         <th scope="col">Nombre</th>
         <th scope="col">Tipo</th>
-        <th scope="col" width="80"></th>
-        <th scope="col" width="80"></th>
+        <th scope="col" width="60"></th>
+        <th scope="col" width="60"></th>
     </tr>
     </thead>
     <tbody>

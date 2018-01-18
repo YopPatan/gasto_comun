@@ -3,7 +3,7 @@ package com.gasto.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "liquidacion_item", schema = "gastosdb", catalog = "")
+@Table(name = "liquidacion_item")
 public class LiquidacionItem {
     private int id;
     private int monto;
@@ -60,5 +60,10 @@ public class LiquidacionItem {
 
     public void setLiquidacion(Liquidacion liquidacion) {
         this.liquidacion = liquidacion;
+    }
+
+    @Transient
+    public int getEsPorcentaje() {
+        return 0;
     }
 }

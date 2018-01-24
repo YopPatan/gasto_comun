@@ -2,7 +2,6 @@
 <%@ page isELIgnored="false" %> <!-- IMPORTANTE PARA PARSEAR JSP -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<jsp:useBean id="PersonalItemUtil" class="com.gasto.model.PersonalItem" />
 
 <div class="modal fade" id="personalItemModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -23,7 +22,7 @@
                         <label class="col-sm-3 col-form-label col-form-label-sm">Tipo</label>
                         <div class="col-sm-9">
                             <div class="btn-group btn-group-sm" data-toggle="buttons">
-                                <c:forEach var="personalItemTipo" items="${PersonalItemUtil.tipoNombres}">
+                                <c:forEach var="personalItemTipo" items="${personalItemTipos}">
                                     <label class="btn btn-secondary ${personalItem.tipo == personalItemTipo.key ? "active" : ""}">
                                         <input type="radio" name="personal_item_tipo" value="${personalItemTipo.key}" autocomplete="off" ${personalItem.tipo == personalItemTipo.key ? "checked" : ""} required />${personalItemTipo.value}
                                     </label>

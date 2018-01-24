@@ -2,7 +2,6 @@ package com.gasto.app;
 
 import com.gasto.model.Boleta;
 import com.gasto.model.BoletaPago;
-import com.gasto.model.Cuenta;
 import com.gasto.repository.BoletaPagoRepository;
 import com.gasto.repository.BoletaRepository;
 import org.springframework.stereotype.Controller;
@@ -34,8 +33,11 @@ public class BoletaPagoController {
 
     @RequestMapping("/edit/{boletaPagoId}")
     public String update(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaPagoId") Integer boletaPagoId, Model model) {
+        BoletaPago boletaPago = boletaPagoRepository.findById(boletaPagoId).get();
+
         model.addAttribute("cuentaId", cuentaId);
         model.addAttribute("boletaPago", boletaPagoRepository.findById(boletaPagoId).get());
+        model.addAttribute("boleta", boletaRepository.findById(boletaPago.getBoleta().getId()).get());
         return "partials/_boleta_pago_modal";
     }
 

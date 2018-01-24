@@ -86,7 +86,7 @@ public class PersonalItem {
     }
 
     @Transient
-    public HashMap<Integer, String> getTipoNombres() {
+    public static HashMap<Integer, String> getTipoNombres() {
         return tipoNombres;
     }
 }

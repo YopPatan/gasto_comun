@@ -53,9 +53,9 @@ public class Cuenta {
 
     private static HashMap<Integer, String> tipoNombres = new HashMap<Integer, String>();
     static {
-        tipoNombres.put(0, "Cuentas");
-        tipoNombres.put(1, "Mantención");
-        tipoNombres.put(2, "Otros");
+        tipoNombres.put(1, "Uso y Consumo");
+        tipoNombres.put(2, "Mantención y Reparación");
+        tipoNombres.put(3, "Otros");
     }
 
     @Transient
@@ -64,7 +64,7 @@ public class Cuenta {
     }
 
     @Transient
-    public HashMap<Integer, String> getTipoNombres() {
+    public static HashMap<Integer, String> getTipoNombres() {
         return tipoNombres;
     }
 

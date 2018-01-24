@@ -88,7 +88,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <table class="table table-sm-aux">
-                                            <thead class="thead-dark">
+                                            <thead class="bg-info" style="color: #fff;">
                                             <tr>
                                                 <th scope="col" colspan="3">Haberes Imponibles</th>
                                             </tr>
@@ -103,7 +103,7 @@
                                                 </tr>
                                             </c:forEach>
 
-                                            <tr class="table-active">
+                                            <tr class="table-light">
                                                 <th scope="row" colspan="2">Total Imponible</th>
                                                 <td>
                                                     <div id="totalImponibles" style="text-align: right;"></div>
@@ -112,7 +112,7 @@
                                             </tbody>
                                         </table>
                                         <table class="table table-sm-aux">
-                                            <thead class="thead-dark">
+                                            <thead class="bg-info" style="color: #fff;">
                                             <tr>
                                                 <th scope="col" colspan="3">Haberes No Imponibles</th>
                                             </tr>
@@ -127,7 +127,7 @@
                                                 </tr>
                                             </c:forEach>
 
-                                            <tr class="table-active">
+                                            <tr class="table-light">
                                                 <th scope="row" colspan="2">Total No Imponible</th>
                                                 <td>
                                                     <div id="totalNoImponibles" style="text-align: right;"></div>
@@ -138,7 +138,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <table class="table table-sm-aux">
-                                            <thead class="thead-dark">
+                                            <thead class="bg-info" style="color: #fff;">
                                             <tr>
                                                 <th scope="col" colspan="3">Descuentos</th>
                                             </tr>
@@ -174,7 +174,7 @@
                                                 </tr>
                                             </c:forEach>
 
-                                            <tr class="table-active">
+                                            <tr class="table-light">
                                                 <th scope="row" colspan="2">Total Descuentos</th>
                                                 <td>
                                                     <div id="totalDescuentos" style="text-align: right;"></div>
@@ -184,15 +184,16 @@
                                         </table>
                                     </div>
                                 </div>
-                            </li>
-
-                            <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-sm-3 offset-sm-6">
-                                        <div style="font-weight: bold; padding-left: .6rem;">Liquido</div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div id="totalLiquido" style="text-align: right; padding-right: .6rem;"></div>
+                                    <div class="col-sm-12">
+                                        <table class="table table-sm-aux">
+                                            <tr class="table-active">
+                                                <th scope="row" width="80%">Total liquido</th>
+                                                <td>
+                                                    <div id="totalLiquido" style="text-align: right;"></div>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </li>

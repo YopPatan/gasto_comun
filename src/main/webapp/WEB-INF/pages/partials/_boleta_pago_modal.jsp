@@ -14,16 +14,25 @@
                         <input type="hidden" name="boleta_pago_id" value="${boletaPago.id}" />
                     </c:if>
                     <c:if test="${boletaAdeudadas != null}">
-                    <div class="form-group row">
-                        <label for="boleta_id" class="col-sm-3 col-form-label col-form-label-sm">Boleta</label>
-                        <div class="col-sm-9">
-                            <select class="form-control form-control-sm" id="boleta_id" name="boleta_id" required>
-                                <c:forEach var="boletaAdeudada" items="${boletaAdeudadas}">
-                                    <option value="${boletaAdeudada.id}" ${boletaPago.boleta.id == boletaAdeudada.id ? "selected" : ""}><fmt:formatDate pattern="dd/MM/yyyy" value="${boletaAdeudada.fecha}" /></option>
-                                </c:forEach>
-                            </select>
+                        <div class="form-group row">
+                            <label for="boleta_id" class="col-sm-3 col-form-label col-form-label-sm">Boleta</label>
+                            <div class="col-sm-9">
+                                <select class="form-control form-control-sm" id="boleta_id" name="boleta_id" required>
+                                    <c:forEach var="boletaAdeudada" items="${boletaAdeudadas}">
+                                        <option value="${boletaAdeudada.id}" ${boletaPago.boleta.id == boletaAdeudada.id ? "selected" : ""}><fmt:formatDate pattern="dd/MM/yyyy" value="${boletaAdeudada.fecha}" /></option>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                    </c:if>
+                    <c:if test="${boleta != null}">
+                        <input type="hidden" name="boleta_id" value="${boleta.id}" />
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label col-form-label-sm">Boleta</label>
+                            <label class="col-sm-9 col-form-label col-form-label-sm">
+                                <fmt:formatDate pattern="dd/MM/yyyy" value="${boleta.fecha}" />
+                            </label>
+                        </div>
                     </c:if>
                     <div class="form-group row">
                         <label for="boleta_pago_fecha" class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>

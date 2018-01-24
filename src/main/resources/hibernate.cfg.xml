@@ -23,6 +23,7 @@
       <mapping class="com.gasto.model.LiquidacionItem"/>
       <mapping class="com.gasto.model.PersonalItem"/>
       <mapping class="com.gasto.model.PersonalTurno"/>
+      <mapping class="com.gasto.app.Gastocomun"/>
 
       <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->

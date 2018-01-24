@@ -39,7 +39,7 @@ public class BoletaController {
     }
 
     @RequestMapping("/save")
-    public String save(@PathVariable("cuentaId") Integer cuentaId, Model model, HttpServletRequest request) throws ParseException {
+    public String save(@PathVariable("cuentaId") Integer cuentaId, Model model, HttpServletRequest request) {
         Boleta boleta;
         if (request.getParameter("boleta_id") != null) {
             Integer boletaId = Integer.parseInt(request.getParameter("boleta_id"));

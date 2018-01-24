@@ -22,7 +22,7 @@
 <body>
 
 <jsp:include page="partials/_menu.jsp" >
-    <jsp:param name="selected" value="personal"/>
+    <jsp:param name="selected" value="gastocomun"/>
 </jsp:include>
 
 <div>
@@ -30,11 +30,11 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                Personal
+                Cuentas
             </div>
             <div class="card-body">
-                <a href="/personal/new" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</a>
-                <jsp:include page="partials/_personal_table.jsp" />
+                <a href="/gastocomun/new" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</a>
+                <jsp:include page="partials/_gastocomun_table.jsp" />
             </div>
         </div>
     </div>

@@ -12,6 +12,7 @@
         <th scope="col">Monto No Imponible</th>
         <th scope="col">Monto Descuentos</th>
         <th scope="col">Monto Liquido</th>
+        <th scope="col">Estado</th>
         <th scope="col" width="60"></th>
         <th scope="col" width="60"></th>
     </tr>
@@ -26,6 +27,7 @@
             <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${liquidacion.montoNoImponible}" /></td>
             <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${liquidacion.montoDescuentos}" /></td>
             <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${liquidacion.montoLiquido}" /></td>
+            <td>${liquidacion.estadoNombre}</td>
             <td><button onclick="loadLiquidacionModal('/personal/${personalId}/liquidacion/edit/${liquidacion.id}');" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
             <td><a href="/personal/${personalId}/liquidacion/delete/${liquidacion.id}" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
         </tr>

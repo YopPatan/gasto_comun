@@ -3,6 +3,7 @@ package com.gasto.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.HashMap;
 
 @Entity
 @Table(name = "liquidacion")
@@ -15,7 +16,7 @@ public class Liquidacion {
     private int montoDescuentos;
     private int montoLiquido;
     private int diasTrabajados;
-    private Gastocomun gastocomun;
+    private int estado;
     private Personal personal;
     private Collection<PersonalPago> personalPagos;
     private Collection<LiquidacionItem> liquidacionItems;
@@ -101,14 +102,14 @@ public class Liquidacion {
         this.diasTrabajados = diasTrabajados;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "gastocomun_id", referencedColumnName = "id")
-    public Gastocomun getGastocomun() {
-        return gastocomun;
+    @Basic
+    @Column(name = "estado", nullable = false)
+    public int getEstado() {
+        return estado;
     }
 
-    public void setGastocomun(Gastocomun gastocomun) {
-        this.gastocomun = gastocomun;
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
     @ManyToOne
@@ -137,6 +138,22 @@ public class Liquidacion {
 
     public void setLiquidacionItems(Collection<LiquidacionItem> liquidacionItems) {
         this.liquidacionItems = liquidacionItems;
+    }
+
+    private static HashMap<Integer, String> estadoNombres = new HashMap<Integer, String>();
+    static {
+        estadoNombres.put(0, "Adeudado");
+        estadoNombres.put(1, "Pagado");
+    }
+
+    @Transient
+    public String getEstadoNombre() {
+        return estadoNombres.get(this.estado);
+    }
+
+    @Transient
+    public HashMap<Integer, String> getEstadoNombres() {
+        return estadoNombres;
     }
 
 }

@@ -10,8 +10,12 @@ public class Gastocomun {
     private int id;
     private Timestamp fecha;
     private Timestamp fechaVencimiento;
+    private String observaciones;
+    private int montoComun;
+    private int montoReserva;
+    private int montoTotal;
     private Collection<BoletaPago> boletaPagos;
-    private Collection<Liquidacion> liquidaciones;
+    private Collection<PersonalPago> personalPagos;
     private Collection<MapaGastocomunDepartamento> mapaGastocomunDepartamentos;
 
     @Id
@@ -44,27 +48,44 @@ public class Gastocomun {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Gastocomun that = (Gastocomun) o;
-
-        if (id != that.id) return false;
-        if (fecha != null ? !fecha.equals(that.fecha) : that.fecha != null) return false;
-        if (fechaVencimiento != null ? !fechaVencimiento.equals(that.fechaVencimiento) : that.fechaVencimiento != null)
-            return false;
-
-        return true;
+    @Basic
+    @Column(name = "observaciones", nullable = false, length = -1)
+    public String getObservaciones() {
+        return observaciones;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (fecha != null ? fecha.hashCode() : 0);
-        result = 31 * result + (fechaVencimiento != null ? fechaVencimiento.hashCode() : 0);
-        return result;
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    @Basic
+    @Column(name = "monto_comun", nullable = false)
+    public int getMontoComun() {
+        return montoComun;
+    }
+
+    public void setMontoComun(int montoComun) {
+        this.montoComun = montoComun;
+    }
+
+    @Basic
+    @Column(name = "monto_reserva", nullable = false)
+    public int getMontoReserva() {
+        return montoReserva;
+    }
+
+    public void setMontoReserva(int montoReserva) {
+        this.montoReserva = montoReserva;
+    }
+
+    @Basic
+    @Column(name = "monto_total", nullable = false)
+    public int getMontoTotal() {
+        return montoTotal;
+    }
+
+    public void setMontoTotal(int montoTotal) {
+        this.montoTotal = montoTotal;
     }
 
     @OneToMany(mappedBy = "gastocomun")
@@ -77,12 +98,12 @@ public class Gastocomun {
     }
 
     @OneToMany(mappedBy = "gastocomun")
-    public Collection<Liquidacion> getLiquidaciones() {
-        return liquidaciones;
+    public Collection<PersonalPago> getPersonalPago() {
+        return personalPagos;
     }
 
-    public void setLiquidaciones(Collection<Liquidacion> liquidaciones) {
-        this.liquidaciones = liquidaciones;
+    public void setPersonalPago(Collection<PersonalPago> personalPagos) {
+        this.personalPagos = personalPagos;
     }
 
     @OneToMany(mappedBy = "gastocomun")

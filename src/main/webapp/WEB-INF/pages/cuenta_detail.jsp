@@ -42,7 +42,9 @@
 </head>
 <body>
 
-<jsp:include page="partials/_menu.jsp" />
+<jsp:include page="partials/_menu.jsp" >
+    <jsp:param name="selected" value="cuenta"/>
+</jsp:include>
 <jsp:include page="partials/_attached_modal.jsp" />
 
 <div class="container">
@@ -66,7 +68,7 @@
 
         <div id="boletaModalContent"></div>
 
-        <div class="card">
+        <div class="card" style="margin-bottom: 20px">
             <div class="card-header">
                 Pagos
             </div>

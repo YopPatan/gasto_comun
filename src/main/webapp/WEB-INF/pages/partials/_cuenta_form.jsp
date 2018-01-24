@@ -2,7 +2,6 @@
 <%@ page isELIgnored="false" %> <!-- IMPORTANTE PARA PARSEAR JSP -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<jsp:useBean id="CuentaUtil" class="com.gasto.model.Cuenta" />
 
 <form:form action="/cuenta/save" id="cuentaForm">
     <c:if test="${cuenta != null}">
@@ -18,7 +17,7 @@
         <label class="col-sm-2 col-form-label col-form-label-sm">Tipo</label>
         <div class="col-sm-10">
             <div class="btn-group btn-group-sm" data-toggle="buttons">
-                <c:forEach var="cuentaTipo" items="${CuentaUtil.tipoNombres}">
+                <c:forEach var="cuentaTipo" items="${cuentaTipos}">
                 <label class="btn btn-secondary ${cuenta.tipo == cuentaTipo.key ? "active" : ""}">
                     <input type="radio" name="cuenta_tipo" value="${cuentaTipo.key}" autocomplete="off" ${cuenta.tipo == cuentaTipo.key ? "checked" : ""} required />${cuentaTipo.value}
                 </label>

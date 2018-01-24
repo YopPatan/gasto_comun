@@ -49,7 +49,10 @@
 </head>
 <body>
 
-<jsp:include page="partials/_menu.jsp" />
+<jsp:include page="partials/_menu.jsp" >
+    <jsp:param name="selected" value="personal"/>
+</jsp:include>
+<jsp:include page="partials/_attached_modal.jsp" />
 
 <div class="container">
     <div class="card" style="margin-bottom: 20px">
@@ -65,7 +68,25 @@
         </div>
         <div class="card-body">
             <button type="button" onclick="loadPersonalItemModal('/personal/${personal.id}/item/new')" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</button>
-            <jsp:include page="partials/_personal_item_table.jsp" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <c:set var="personalItems" value="${personalItemImponibles}" scope="request"/>
+                    <jsp:include flush="true" page="partials/_personal_item_table.jsp">
+                        <jsp:param name="title" value="Haberes Imponibles"/>
+                    </jsp:include>
+
+                    <c:set var="personalItems" value="${personalItemNoImponibles}" scope="request"/>
+                    <jsp:include flush="true" page="partials/_personal_item_table.jsp">
+                        <jsp:param name="title" value="Haberes No Imponibles"/>
+                    </jsp:include>
+                </div>
+                <div class="col-sm-6">
+                    <c:set var="personalItems" value="${personalItemDescuentos}" scope="request"/>
+                    <jsp:include flush="true" page="partials/_personal_item_table.jsp">
+                        <jsp:param name="title" value="Descuentos"/>
+                    </jsp:include>
+                </div>
+            </div>
         </div>
     </div>
 

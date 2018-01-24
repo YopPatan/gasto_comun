@@ -33,6 +33,7 @@ public class CuentaController {
 
     @RequestMapping("/new")
     public String create(Model model) {
+        model.addAttribute("cuentaTipos", Cuenta.getTipoNombres());
         return "cuenta_detail";
     }
 
@@ -40,6 +41,7 @@ public class CuentaController {
     public String update(@PathVariable("cuentaId") Integer cuentaId, Model model) {
         model.addAttribute("cuentaId", cuentaId);
         model.addAttribute("cuenta", cuentaRepository.findById(cuentaId).get());
+        model.addAttribute("cuentaTipos", Cuenta.getTipoNombres());
         // No llamo a cuenta.getBoletas() porque JPA no es Lizzy
         model.addAttribute("boletas", boletaRepository.findByCuentaId(cuentaId));
         model.addAttribute("boletaPagos", boletaPagoRepository.findByBoletaCuentaId(cuentaId));

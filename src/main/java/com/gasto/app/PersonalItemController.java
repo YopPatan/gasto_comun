@@ -26,6 +26,7 @@ public class PersonalItemController {
     @RequestMapping("/new")
     public String create(@PathVariable("personalId") Integer personalId, Model model) {
         model.addAttribute("personalId", personalId);
+        model.addAttribute("personalItemTipos", PersonalItem.getTipoNombres());
         return "partials/_personal_item_modal";
     }
 
@@ -34,6 +35,7 @@ public class PersonalItemController {
     public String update(@PathVariable("personalId") Integer personalId, @PathVariable("personalItemId") Integer personalItemId, Model model) {
         model.addAttribute("personalId", personalId);
         model.addAttribute("personalItem", personalItemRepository.findById(personalItemId).get());
+        model.addAttribute("personalItemTipos", PersonalItem.getTipoNombres());
         return "partials/_personal_item_modal";
     }
 

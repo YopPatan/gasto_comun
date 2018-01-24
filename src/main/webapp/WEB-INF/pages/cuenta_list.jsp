@@ -21,7 +21,9 @@
 </head>
 <body>
 
-<jsp:include page="partials/_menu.jsp" />
+<jsp:include page="partials/_menu.jsp" >
+    <jsp:param name="selected" value="cuenta"/>
+</jsp:include>
 
 <div>
 

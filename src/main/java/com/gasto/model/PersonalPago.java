@@ -11,8 +11,10 @@ public class PersonalPago {
     private Timestamp fecha;
     private int tipo;
     private int monto;
+    private String adjunto;
     private Personal personal;
     private Liquidacion liquidacion;
+    private Gastocomun gastocomun;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -54,6 +56,16 @@ public class PersonalPago {
         this.monto = monto;
     }
 
+    @Basic
+    @Column(name = "adjunto", nullable = true)
+    public String getAdjunto() {
+        return adjunto;
+    }
+
+    public void setAdjunto(String adjunto) {
+        this.adjunto = adjunto;
+    }
+
     @ManyToOne
     @JoinColumn(name = "personal_id", referencedColumnName = "id", nullable = false)
     public Personal getPersonal() {
@@ -74,10 +86,21 @@ public class PersonalPago {
         this.liquidacion = liquidacion;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "gastocomun_id", referencedColumnName = "id")
+    public Gastocomun getGastocomun() {
+        return gastocomun;
+    }
+
+    public void setGastocomun(Gastocomun gastocomun) {
+        this.gastocomun = gastocomun;
+    }
+
     private static HashMap<Integer, String> tipoNombres = new HashMap<Integer, String>();
     static {
         tipoNombres.put(1, "Remuneración");
         tipoNombres.put(2, "Anticipo");
+        tipoNombres.put(3, "Imposición");
     }
 
     @Transient
@@ -86,7 +109,7 @@ public class PersonalPago {
     }
 
     @Transient
-    public HashMap<Integer, String> getTipoNombres() {
+    public static HashMap<Integer, String> getTipoNombres() {
         return tipoNombres;
     }
 }

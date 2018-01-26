@@ -9,13 +9,13 @@ public class BoletaPago {
     private int id;
     private Timestamp fecha;
     private String adjunto;
-    private int cuota;
     private int monto;
     private Gastocomun gastocomun;
     private Boleta boleta;
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -42,16 +42,6 @@ public class BoletaPago {
 
     public void setAdjunto(String adjunto) {
         this.adjunto = adjunto;
-    }
-
-    @Basic
-    @Column(name = "cuota", nullable = false)
-    public int getCuota() {
-        return cuota;
-    }
-
-    public void setCuota(int cuota) {
-        this.cuota = cuota;
     }
 
     @Basic

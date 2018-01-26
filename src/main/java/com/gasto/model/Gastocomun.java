@@ -16,10 +16,11 @@ public class Gastocomun {
     private int montoTotal;
     private Collection<BoletaPago> boletaPagos;
     private Collection<PersonalPago> personalPagos;
-    private Collection<MapaGastocomunDepartamento> mapaGastocomunDepartamentos;
+    private Collection<DepartamentoGasto> departamentoGastos;
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -49,7 +50,7 @@ public class Gastocomun {
     }
 
     @Basic
-    @Column(name = "observaciones", nullable = false, length = -1)
+    @Column(name = "observaciones", nullable = true, length = -1)
     public String getObservaciones() {
         return observaciones;
     }
@@ -107,11 +108,11 @@ public class Gastocomun {
     }
 
     @OneToMany(mappedBy = "gastocomun")
-    public Collection<MapaGastocomunDepartamento> getMapaGastocomunDepartamentos() {
-        return mapaGastocomunDepartamentos;
+    public Collection<DepartamentoGasto> getDepartamentoGastos() {
+        return departamentoGastos;
     }
 
-    public void setMapaGastocomunDepartamentos(Collection<MapaGastocomunDepartamento> mapaGastocomunDepartamentos) {
-        this.mapaGastocomunDepartamentos = mapaGastocomunDepartamentos;
+    public void setDepartamentoGastos(Collection<DepartamentoGasto> departamentoGastos) {
+        this.departamentoGastos = departamentoGastos;
     }
 }

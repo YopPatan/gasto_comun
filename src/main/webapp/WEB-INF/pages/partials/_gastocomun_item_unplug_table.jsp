@@ -44,7 +44,7 @@
             <td>
                 <div class="monto-nofinal"><fmt:formatNumber type="number" maxFractionDigits="0" value="${pago.monto}" /></div>
             </td>
-            <td><button onclick="changeItem('${param.viewTipo}', '${pago.id}', 0);" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
+            <td><button type="button" onclick="changeItem('${param.viewTipo}', '${pago.id}', 0);" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
         </tr>
     </c:forEach>
 

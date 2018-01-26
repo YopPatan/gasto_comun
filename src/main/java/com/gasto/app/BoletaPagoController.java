@@ -42,7 +42,7 @@ public class BoletaPagoController {
     }
 
     @RequestMapping("/save")
-    public String save(@PathVariable("cuentaId") Integer cuentaId, Model model, HttpServletRequest request) throws ParseException {
+    public String save(@PathVariable("cuentaId") Integer cuentaId, HttpServletRequest request) {
         BoletaPago boletaPago;
         if (request.getParameter("boleta_pago_id") != null) {
             Integer boletaPagoId = Integer.parseInt(request.getParameter("boleta_pago_id"));
@@ -57,7 +57,6 @@ public class BoletaPagoController {
         }
 
         boletaPago.setFecha(Timestamp.valueOf(request.getParameter("boleta_pago_fecha") + " 00:00:00"));
-        boletaPago.setCuota(0);
         boletaPago.setAdjunto(request.getParameter("boleta_pago_adjunto"));
         boletaPago.setMonto(Integer.parseInt(request.getParameter("boleta_pago_monto")));
         boletaPagoRepository.save(boletaPago);
@@ -65,7 +64,7 @@ public class BoletaPagoController {
     }
 
     @RequestMapping("/delete/{boletaPagoId}")
-    public String delete(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaPagoId") Integer boletaPagoId, Model model, HttpServletRequest request) {
+    public String delete(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaPagoId") Integer boletaPagoId) {
         BoletaPago boletaPago = boletaPagoRepository.findById(boletaPagoId).get();
         boletaPagoRepository.delete(boletaPago);
         return "redirect:/cuenta/edit/" + cuentaId;

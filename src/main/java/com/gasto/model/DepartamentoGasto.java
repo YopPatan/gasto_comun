@@ -3,8 +3,8 @@ package com.gasto.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "mapa_gastocomun_departamento")
-public class MapaGastocomunDepartamento {
+@Table(name = "departamento_gasto")
+public class DepartamentoGasto {
     private int id;
     private int montoComun;
     private int montoAgua;
@@ -15,6 +15,7 @@ public class MapaGastocomunDepartamento {
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -68,7 +69,7 @@ public class MapaGastocomunDepartamento {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MapaGastocomunDepartamento that = (MapaGastocomunDepartamento) o;
+        DepartamentoGasto that = (DepartamentoGasto) o;
 
         if (id != that.id) return false;
         if (montoComun != that.montoComun) return false;

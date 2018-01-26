@@ -52,7 +52,7 @@ public class PersonalPagoController {
     }
 
     @RequestMapping("/save")
-    public String save(@PathVariable("personalId") Integer personalId, Model model, HttpServletRequest request) {
+    public String save(@PathVariable("personalId") Integer personalId, HttpServletRequest request) {
         PersonalPago personalPago;
         if (request.getParameter("personal_pago_id") != null) {
             Integer personalPagoId = Integer.parseInt(request.getParameter("personal_pago_id"));
@@ -80,7 +80,7 @@ public class PersonalPagoController {
     }
 
     @RequestMapping("/delete/{personalPagoId}")
-    public String delete(@PathVariable("personalId") Integer personalId, @PathVariable("personalPagoId") Integer personalPagoId, Model model, HttpServletRequest request) {
+    public String delete(@PathVariable("personalId") Integer personalId, @PathVariable("personalPagoId") Integer personalPagoId) {
         PersonalPago personalPago = personalPagoRepository.findById(personalPagoId).get();
         personalPagoRepository.delete(personalPago);
         return "redirect:/personal/edit/" + personalId;

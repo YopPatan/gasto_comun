@@ -19,6 +19,7 @@ public class Boleta {
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -38,7 +39,7 @@ public class Boleta {
     }
 
     @Basic
-    @Column(name = "folio", nullable = false, length = 255)
+    @Column(name = "folio", nullable = true, length = 255)
     public String getFolio() {
         return folio;
     }

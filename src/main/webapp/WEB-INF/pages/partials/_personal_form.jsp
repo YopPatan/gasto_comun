@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <div class="col-sm-10">
+        <div class="col-sm-12">
             <button type="submit" class="btn btn-info btn-sm">Guardar</button>
         </div>
     </div>

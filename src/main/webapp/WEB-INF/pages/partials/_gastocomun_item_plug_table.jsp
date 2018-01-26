@@ -29,7 +29,7 @@
             <td width="calc(20% - 60px)">
                 <div class="monto-nofinal"><fmt:formatNumber type="number" maxFractionDigits="0" value="${pago.monto}" /></div>
             </td>
-            <td width="60"><button onclick="changeItem('${param.viewTipo}', '${pago.id}', 1);" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-minus" aria-hidden="true"></i></button></td>
+            <td width="60"><button type="button" onclick="changeItem('${param.viewTipo}', '${pago.id}', 1);" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-minus" aria-hidden="true"></i></button></td>
         </tr>
     </c:forEach>
     <tr class="table-light">

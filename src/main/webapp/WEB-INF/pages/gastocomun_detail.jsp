@@ -2,6 +2,7 @@
 <%@ page isELIgnored="false" %> <!-- IMPORTANTE PARA PARSEAR JSP -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <head>
@@ -39,9 +40,12 @@
                 $("#total_items_" + key).html($.number(value, 0, '', '.'));
             });
 
-            $("#total_prorratear").html($.number(totalProrratear, 0, '', '.'));
+            $("#total_comun").html($.number(totalProrratear, 0, '', '.'));
             $("#total_reserva").html($.number(parseInt(totalProrratear * 0.05), 0, '', '.'));
             $("#total_gasto").html($.number(parseInt(totalProrratear * 1.05), 0, '', '.'));
+            $("[name=gastocomun_monto_comun]").val(totalProrratear);
+            $("[name=gastocomun_monto_reserva]").val(parseInt(totalProrratear * 0.05));
+            $("[name=gastocomun_monto_total]").val(parseInt(totalProrratear * 1.05));
         }
 
         function changeItem(viewTipo, pagoId, currentStatus) {
@@ -72,33 +76,36 @@
 
 <div class="container">
     <form:form action="/gastocomun/save" id="gastocomunForm">
+        <c:if test="${gastocomun != null}">
+            <input type="hidden" name="gastocomun_id" value="${gastocomun.id}" />
+        </c:if>
+        <input type="hidden" name="gastocomun_monto_comun" value="" />
+        <input type="hidden" name="gastocomun_monto_reserva" value="" />
+        <input type="hidden" name="gastocomun_monto_total" value="" />
 
         <div class="card" style="margin-bottom: 20px">
             <div class="card-header">Gasto Comun</div>
             <div class="card-body">
-                <c:if test="${gastocomun != null}">
-                    <input type="hidden" name="gastocomun_id" value="${gastocomun.id}" />
-                </c:if>
                 <div class="form-group row">
                     <label for="gastocomun_fecha" class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
                     <div class="col-sm-9">
-                        <input type="date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${personalPago.fecha}" />" class="form-control form-control-sm" id="gastocomun_fecha" name="gastocomun_fecha" required />
+                        <input type="date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${gastocomun.fecha}" />" class="form-control form-control-sm" id="gastocomun_fecha" name="gastocomun_fecha" required />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="gastocomun_vencimiento" class="col-sm-3 col-form-label col-form-label-sm">Vencimiento</label>
                     <div class="col-sm-9">
-                        <input type="date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${personalPago.fecha}" />" class="form-control form-control-sm" id="gastocomun_vencimiento" name="gastocomun_vencimiento" required />
+                        <input type="date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${gastocomun.fecha}" />" class="form-control form-control-sm" id="gastocomun_vencimiento" name="gastocomun_vencimiento" required />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="gastocomun_observaciones" class="col-sm-3 col-form-label col-form-label-sm">Observaciones</label>
                     <div class="col-sm-9">
-                        <textarea class="form-control form-control-sm" id="gastocomun_observaciones" name="gastocomun_observaciones" rows="3"></textarea>
+                        <textarea class="form-control form-control-sm" id="gastocomun_observaciones" name="gastocomun_observaciones" rows="3">${gastocomun.observaciones}</textarea>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <button type="submit" class="btn btn-info btn-sm">Guardar</button>
                     </div>
                 </div>
@@ -133,7 +140,7 @@
                     <tbody>
                     <tr class="table-light">
                         <th scope="row">Subtotal gastos a prorratear</th>
-                        <td><div id="total_prorratear" class="monto-nofinal"></div></td>
+                        <td><div id="total_comun" class="monto-nofinal"></div></td>
                         <td width="60"></td>
                     </tr>
                     <tr class="table-light">
@@ -148,6 +155,12 @@
                     </tr>
                     </tbody>
                 </table>
+                <div class="form-group row" style="margin-top: 30px">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-info btn-sm">Guardar</button>
+                        <a href="/gastocomun/${gastocomun.id}/prorratear" class="btn btn-dark btn-sm">Prorratear</a>
+                    </div>
+                </div>
             </div>
         </div>
 

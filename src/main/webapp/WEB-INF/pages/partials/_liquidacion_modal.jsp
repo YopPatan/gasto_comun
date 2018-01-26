@@ -49,7 +49,7 @@
 
 <div class="modal fade" id="liquidacionModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-lg-aux" role="document">
-        <form:form action="/personal/${personal.id}/liquidacion/save" id="liquidacionForm">
+        <form:form action="/personal/${personalId}/liquidacion/save" id="liquidacionForm">
             <c:if test="${liquidacion != null}">
                 <input type="hidden" name="liquidacion_id" value="${liquidacion.id}" />
             </c:if>

@@ -58,7 +58,7 @@ public class LiquidacionController {
     }
 
     @RequestMapping("/save")
-    public String save(@PathVariable("personalId") Integer personalId, Model model, HttpServletRequest request) {
+    public String save(@PathVariable("personalId") Integer personalId, HttpServletRequest request) {
         Liquidacion liquidacion;
         if (request.getParameter("liquidacion_id") != null) {
             Integer liquidacionId = Integer.parseInt(request.getParameter("liquidacion_id"));
@@ -116,7 +116,7 @@ public class LiquidacionController {
     }
 
     @RequestMapping("/delete/{liquidacionId}")
-    public String delete(@PathVariable("personalId") Integer personalId, @PathVariable("liquidacionId") Integer liquidacionId, Model model, HttpServletRequest request) {
+    public String delete(@PathVariable("personalId") Integer personalId, @PathVariable("liquidacionId") Integer liquidacionId) {
         Liquidacion liquidacion = liquidacionRepository.findById(liquidacionId).get();
         liquidacionRepository.delete(liquidacion);
         return "redirect:/personal/edit/" + personalId;

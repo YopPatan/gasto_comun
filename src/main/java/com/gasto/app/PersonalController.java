@@ -42,7 +42,7 @@ public class PersonalController {
 
     @RequestMapping("/edit/{personalId}")
     public String update(@PathVariable("personalId") Integer personalId, Model model) {
-        model.addAttribute("personalId", personalId);
+        //model.addAttribute("personalId", personalId);
         model.addAttribute("personal", personalRepository.findById(personalId).get());
         model.addAttribute("personalPagos", personalPagoRepository.findByPersonalId(personalId));
         model.addAttribute("personalItemImponibles", personalItemRepository.findByPersonalIdAndTipo(personalId, 1));
@@ -53,7 +53,7 @@ public class PersonalController {
     }
 
     @RequestMapping("/save")
-    public String save(Model model, HttpServletRequest request) {
+    public String save(HttpServletRequest request) {
         Personal personal;
         if (request.getParameter("personal_id") != null) {
             Integer personalId = Integer.parseInt(request.getParameter("personal_id"));
@@ -73,7 +73,7 @@ public class PersonalController {
     }
 
     @RequestMapping("/delete/{personalId}")
-    public String delete(@PathVariable("personalId") Integer personalId, Model model, HttpServletRequest request) {
+    public String delete(@PathVariable("personalId") Integer personalId) {
         Personal personal = personalRepository.findById(personalId).get();
         personalRepository.delete(personal);
         return "redirect:/personal";

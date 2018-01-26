@@ -15,8 +15,13 @@
             <li class="nav-item ${param.selected == 'personal' ? 'active' : ''}">
                 <a class="nav-link" href="/personal">Personal</a>
             </li>
-            <li class="nav-item ${param.selected == 'departamento' ? 'active' : ''}">
-                <a class="nav-link" href="#">Departamento</a>
+            <li class="nav-item dropdown ${param.selected == 'departamento' ? 'active' : ''}">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Departamento</a>
+                <div class="dropdown-menu" href="#" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/departamento">Departamento</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/consumo">Consumo</a>
+                </div>
             </li>
         </ul>
     </div>

@@ -28,8 +28,8 @@
             <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${liquidacion.montoDescuentos}" /></td>
             <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${liquidacion.montoLiquido}" /></td>
             <td>${liquidacion.estadoNombre}</td>
-            <td><button onclick="loadLiquidacionModal('/personal/${personalId}/liquidacion/edit/${liquidacion.id}');" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
-            <td><a href="/personal/${personalId}/liquidacion/delete/${liquidacion.id}" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+            <td><button onclick="loadLiquidacionModal('/personal/${personal.id}/liquidacion/edit/${liquidacion.id}');" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+            <td><a href="/personal/${personal.id}/liquidacion/delete/${liquidacion.id}" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
         </tr>
     </c:forEach>
 

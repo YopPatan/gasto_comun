@@ -8,12 +8,15 @@ import java.util.Collection;
 public class Departamento {
     private int id;
     private String nombre;
+    private String propietario;
+    private String residente;
     private double alicuota;
-    private Collection<DepartamentoPago> departamento;
-    private Collection<MapaGastocomunDepartamento> mapaGastocomunDepartamentos;
+    private Collection<DepartamentoPago> departamentoPagos;
+    private Collection<DepartamentoGasto> departamentoGastos;
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -33,6 +36,26 @@ public class Departamento {
     }
 
     @Basic
+    @Column(name = "propietario", nullable = true, length = 255)
+    public String getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(String propietario) {
+        this.propietario = propietario;
+    }
+
+    @Basic
+    @Column(name = "residente", nullable = true, length = 255)
+    public String getResidente() {
+        return residente;
+    }
+
+    public void setResidente(String residente) {
+        this.residente = residente;
+    }
+
+    @Basic
     @Column(name = "alicuota", nullable = false, precision = 0)
     public double getAlicuota() {
         return alicuota;
@@ -42,46 +65,21 @@ public class Departamento {
         this.alicuota = alicuota;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Departamento that = (Departamento) o;
-
-        if (id != that.id) return false;
-        if (Double.compare(that.alicuota, alicuota) != 0) return false;
-        if (nombre != null ? !nombre.equals(that.nombre) : that.nombre != null) return false;
-
-        return true;
+    @OneToMany(mappedBy = "departamento")
+    public Collection<DepartamentoPago> getDepartamentoPagos() {
+        return departamentoPagos;
     }
 
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = id;
-        result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
-        temp = Double.doubleToLongBits(alicuota);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+    public void setDepartamentoPagos(Collection<DepartamentoPago> departamentoPagos) {
+        this.departamentoPagos = departamentoPagos;
     }
 
     @OneToMany(mappedBy = "departamento")
-    public Collection<DepartamentoPago> getDepartamento() {
-        return departamento;
+    public Collection<DepartamentoGasto> getDepartamentoGastos() {
+        return departamentoGastos;
     }
 
-    public void setDepartamento(Collection<DepartamentoPago> departamento) {
-        this.departamento = departamento;
-    }
-
-    @OneToMany(mappedBy = "departamento")
-    public Collection<MapaGastocomunDepartamento> getMapaGastocomunDepartamentos() {
-        return mapaGastocomunDepartamentos;
-    }
-
-    public void setMapaGastocomunDepartamentos(Collection<MapaGastocomunDepartamento> mapaGastocomunDepartamentos) {
-        this.mapaGastocomunDepartamentos = mapaGastocomunDepartamentos;
+    public void setDepartamentoGastos(Collection<DepartamentoGasto> departamentoGastos) {
+        this.departamentoGastos = departamentoGastos;
     }
 }

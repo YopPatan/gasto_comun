@@ -49,7 +49,7 @@ public class CuentaController {
     }
 
     @RequestMapping("/save")
-    public String save(Model model, HttpServletRequest request) {
+    public String save(HttpServletRequest request) {
         Cuenta cuenta;
         if (request.getParameter("cuenta_id") != null) {
             Integer cuentaId = Integer.parseInt(request.getParameter("cuenta_id"));
@@ -66,7 +66,7 @@ public class CuentaController {
     }
 
     @RequestMapping("/delete/{cuentaId}")
-    public String delete(@PathVariable("cuentaId") Integer cuentaId, Model model, HttpServletRequest request) {
+    public String delete(@PathVariable("cuentaId") Integer cuentaId) {
         Cuenta cuenta = cuentaRepository.findById(cuentaId).get();
         cuentaRepository.delete(cuenta);
         return "redirect:/cuenta";

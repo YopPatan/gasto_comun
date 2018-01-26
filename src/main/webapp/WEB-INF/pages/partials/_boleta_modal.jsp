@@ -22,7 +22,7 @@
                     <div class="form-group row">
                         <label for="boleta_folio" class="col-sm-3 col-form-label col-form-label-sm">Folio</label>
                         <div class="col-sm-9">
-                            <input value="${boleta.folio}" class="form-control form-control-sm" id="boleta_folio" name="boleta_folio" required />
+                            <input value="${boleta.folio}" class="form-control form-control-sm" id="boleta_folio" name="boleta_folio" />
                         </div>
                     </div>
                     <div class="form-group row">

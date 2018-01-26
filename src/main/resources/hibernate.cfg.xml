@@ -16,7 +16,7 @@
       <mapping class="com.gasto.model.DepartamentoPago"/>
       <mapping class="com.gasto.model.Gastocomun"/>
       <mapping class="com.gasto.model.Liquidacion"/>
-      <mapping class="com.gasto.model.MapaGastocomunDepartamento"/>
+      <mapping class="com.gasto.model.DepartamentoGasto"/>
       <mapping class="com.gasto.model.Personal"/>
       <mapping class="com.gasto.model.PersonalPago"/>
       <mapping class="com.gasto.model.Contrato"/>

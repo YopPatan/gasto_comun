@@ -40,7 +40,7 @@ public class PersonalItemController {
     }
 
     @RequestMapping("/save")
-    public String save(@PathVariable("personalId") Integer personalId, Model model, HttpServletRequest request) {
+    public String save(@PathVariable("personalId") Integer personalId, HttpServletRequest request) {
         PersonalItem personalItem;
         if (request.getParameter("personal_item_id") != null) {
             Integer personalItemId = Integer.parseInt(request.getParameter("personal_item_id"));
@@ -62,7 +62,7 @@ public class PersonalItemController {
     }
 
     @RequestMapping("/delete/{personalItemId}")
-    public String delete(@PathVariable("personalId") Integer personalId, @PathVariable("personalItemId") Integer personalItemId, Model model, HttpServletRequest request) {
+    public String delete(@PathVariable("personalId") Integer personalId, @PathVariable("personalItemId") Integer personalItemId) {
         PersonalItem personalItem = personalItemRepository.findById(personalItemId).get();
         personalItemRepository.delete(personalItem);
         return "redirect:/personal/edit/" + personalId;

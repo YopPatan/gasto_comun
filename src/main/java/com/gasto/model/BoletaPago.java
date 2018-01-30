@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "boleta_pago")
+@Table(name = "boleta_pago", schema = "gastosdb", catalog = "")
 public class BoletaPago {
     private int id;
     private Timestamp fecha;
@@ -12,6 +12,7 @@ public class BoletaPago {
     private int monto;
     private Gastocomun gastocomun;
     private Boleta boleta;
+    private Consumo consumo;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -72,5 +73,15 @@ public class BoletaPago {
 
     public void setBoleta(Boleta boleta) {
         this.boleta = boleta;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "consumo_id", referencedColumnName = "id")
+    public Consumo getConsumo() {
+        return consumo;
+    }
+
+    public void setConsumo(Consumo consumo) {
+        this.consumo = consumo;
     }
 }

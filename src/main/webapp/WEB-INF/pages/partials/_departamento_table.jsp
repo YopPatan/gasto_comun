@@ -5,8 +5,9 @@
 <table class="table table-sm-aux">
     <thead class="thead-dark">
     <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Alicuota</th>
+        <th scope="col" width="100">Numero</th>
+        <th scope="col">Propietario</th>
+        <th scope="col">Residente</th>
         <th scope="col" width="60"></th>
     </tr>
     </thead>
@@ -14,8 +15,9 @@
 
     <c:forEach var="departamento" items="${departamentos}" varStatus="loop">
         <tr>
-            <td>${departamento.nombre}</td>
-            <td>${departamento.alicuota}</td>
+            <th scope="row" style="text-align: center">${departamento.nombre}</th>
+            <td>${departamento.propietario}</td>
+            <td>${departamento.residente}</td>
             <td><a href="/departamento/edit/${departamento.id}" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
         </tr>
     </c:forEach>

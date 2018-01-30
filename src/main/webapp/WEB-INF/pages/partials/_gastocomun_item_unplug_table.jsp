@@ -23,7 +23,14 @@
     <tbody>
 
     <c:forEach var="pago" items="${pagos}" varStatus="loop">
-        <tr id="row_pago_${param.viewTipo}_${pago.id}" style="display: ${pago.gastocomun == null ? 'table-row':'none'}">
+        <c:if test="${param.viewContainer == 'consumo'}">
+            <c:set var="showRow" value="${pago.gastocomun == null && pago.consumo == null}"/>
+        </c:if>
+        <c:if test="${param.viewContainer == 'gastocomun'}">
+            <c:set var="showRow" value="${pago.gastocomun == null}"/>
+            <c:set var="showWarning" value="${param.viewTipo == 'boleta' && pago.consumo != null}"/>
+        </c:if>
+        <tr id="row_pago_${param.viewTipo}_${pago.id}" class="${showWarning ? 'table-warning':''}" style="display: ${showRow ? 'table-row':'none'}">
             <th scope="row" style="text-align: center">${loop.index + 1}</th>
             <td><fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fecha}" /></td>
             <c:if test="${param.viewTipo == 'personal'}">

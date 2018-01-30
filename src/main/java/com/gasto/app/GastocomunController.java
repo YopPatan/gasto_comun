@@ -34,6 +34,15 @@ public class GastocomunController {
     @Resource
     private DepartamentoGastoRepository departamentoGastoRepository;
 
+    @Resource
+    private DepartamentoConsumoRepository departamentoConsumoRepository;
+
+    @Resource
+    private DepartamentoPagoRepository departamentoPagoRepository;
+
+    @Resource
+    private ConsumoRepository consumoRepository;
+
     @RequestMapping()
     public String findAll(Model model) {
         model.addAttribute("gastocomunes", gastocomunRepository.findAll());
@@ -105,9 +114,17 @@ public class GastocomunController {
                     BoletaPago boletaPago = boletaPagoRepository.findById(pagoId).get();
                     if (request.getParameter(entry).equals("1")) {
                         boletaPago.setGastocomun(gastocomun);
+                        if (boletaPago.getConsumo() != null) {
+                            boletaPago.getConsumo().setGastocomun(gastocomun);
+                            consumoRepository.save(boletaPago.getConsumo());
+                        }
                     }
                     else {
                         boletaPago.setGastocomun(null);
+                        if (boletaPago.getConsumo() != null) {
+                            boletaPago.getConsumo().setGastocomun(null);
+                            consumoRepository.save(boletaPago.getConsumo());
+                        }
                     }
                     boletaPagoRepository.save(boletaPago);
                 }
@@ -138,15 +155,23 @@ public class GastocomunController {
     @RequestMapping("/prorratear/{gastocomunId}")
     public String prorratear(@PathVariable("gastocomunId") Integer gastocomunId) {
         Gastocomun gastocomun = gastocomunRepository.findById(gastocomunId).get();
-        gastocomunRepository.delete(gastocomun);
         Iterable<Departamento> departamentos = departamentoRepository.findAll();
         for (Departamento departamento: departamentos) {
             double alicuota = departamento.getAlicuota();
+            int montoGastos = departamentoGastoRepository.getSumMontoByDepartamentoId(departamento.getId());
+            int montoPagos = departamentoPagoRepository.getSumMontoByDepartamentoId(departamento.getId());
+            int montoNoComun = departamentoConsumoRepository.getSumMontoByDepartamentoIdAndGastocomunId(departamento.getId(), gastocomun.getId());
+            //System.out.println(montoGastos);
+            //System.out.println(montoPagos);
             DepartamentoGasto departamentoGasto = new DepartamentoGasto();
             departamentoGasto.setDepartamento(departamento);
             departamentoGasto.setGastocomun(gastocomun);
             departamentoGasto.setMontoComun((int) (gastocomun.getMontoComun() * alicuota));
-            departamentoGasto.setMontoInteres((int) (gastocomun.getMontoReserva() * alicuota));
+            departamentoGasto.setMontoReserva((int) (gastocomun.getMontoReserva() * alicuota));
+            departamentoGasto.setMontoAdeudado((int) (montoGastos - montoPagos));
+            departamentoGasto.setMontoInteres((int) ((montoGastos - montoPagos) * 0.05));
+            departamentoGasto.setMontoNoComun(montoNoComun);
+            departamentoGasto.setMontoTotal(departamentoGasto.getMontoComun() + departamentoGasto.getMontoNoComun() + departamentoGasto.getMontoReserva());
             departamentoGastoRepository.save(departamentoGasto);
         }
         return "redirect:/gastocomun";

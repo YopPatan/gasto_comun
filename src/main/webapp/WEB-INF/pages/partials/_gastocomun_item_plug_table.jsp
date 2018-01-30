@@ -11,8 +11,15 @@
     </thead>
     <tbody>
     <c:forEach var="pago" items="${pagos}" varStatus="loop">
-        <input type="hidden" name="item_${param.viewTipo}_${pago.id}" data-pago-tipo="${param.tipoId}" data-pago-monto="${pago.monto}" value="${pago.gastocomun == null ? '0':'1'}" />
-        <tr id="row_item_${param.viewTipo}_${pago.id}" style="display: ${pago.gastocomun == null ? 'none':'table-row'}">
+        <c:if test="${param.viewContainer == 'consumo'}">
+            <c:set var="showRow" value="${pago.consumo != null}"/>
+        </c:if>
+        <c:if test="${param.viewContainer == 'gastocomun'}">
+            <c:set var="showRow" value="${pago.gastocomun != null}"/>
+            <c:set var="showWarning" value="${param.viewTipo == 'boleta' && pago.consumo != null}"/>
+        </c:if>
+        <input type="hidden" name="item_${param.viewTipo}_${pago.id}" data-pago-consumo="${showWarning ? 1:0}" data-pago-tipo="${param.tipoId}" data-pago-monto="${pago.monto}" value="${showRow ? '1':'0'}" />
+        <tr id="row_item_${param.viewTipo}_${pago.id}" class="${showWarning ? 'table-warning':''}" style="display: ${showRow ? 'table-row':'none'}">
             <th width="50" scope="row" style="text-align: center">${loop.index + 1}</th>
             <td width="calc(20% - 50px)"><fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fecha}" /></td>
             <c:if test="${param.viewTipo == 'personal'}">

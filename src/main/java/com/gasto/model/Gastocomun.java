@@ -17,6 +17,7 @@ public class Gastocomun {
     private Collection<BoletaPago> boletaPagos;
     private Collection<PersonalPago> personalPagos;
     private Collection<DepartamentoGasto> departamentoGastos;
+    private Collection<Consumo> consumos;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -114,5 +115,14 @@ public class Gastocomun {
 
     public void setDepartamentoGastos(Collection<DepartamentoGasto> departamentoGastos) {
         this.departamentoGastos = departamentoGastos;
+    }
+
+    @OneToMany(mappedBy = "gastocomun")
+    public Collection<Consumo> getConsumos() {
+        return consumos;
+    }
+
+    public void setConsumos(Collection<Consumo> consumos) {
+        this.consumos = consumos;
     }
 }

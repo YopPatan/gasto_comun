@@ -30,7 +30,7 @@
                 if (!totalArray[tipoId]) {
                     totalArray[tipoId] = 0;
                 }
-                if ($(elem).val() == 1) {
+                if ($(elem).val() == 1 && $(elem).attr("data-pago-consumo") != 1) {
                     totalArray[tipoId] += parseInt($(elem).attr("data-pago-monto"));
                     totalProrratear += parseInt($(elem).attr("data-pago-monto"));
                 }
@@ -107,6 +107,7 @@
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-info btn-sm">Guardar</button>
+                        <a href="/gastocomun/prorratear/${gastocomun.id}" class="btn btn-dark btn-sm">Prorratear</a>
                     </div>
                 </div>
             </div>
@@ -120,6 +121,7 @@
                     <jsp:param name="tipoNombre" value="Gastos de Administración"/>
                     <jsp:param name="tipoId" value="0"/>
                     <jsp:param name="viewTipo" value="personal"/>
+                    <jsp:param name="viewContainer" value="gastocomun"/>
                 </jsp:include>
 
                 <c:forEach var="cuentaTipo" items="${cuentaTipos}">
@@ -128,6 +130,7 @@
                         <jsp:param name="tipoNombre" value="${cuentaTipo.value}"/>
                         <jsp:param name="tipoId" value="${cuentaTipo.key}"/>
                         <jsp:param name="viewTipo" value="boleta"/>
+                        <jsp:param name="viewContainer" value="gastocomun"/>
                     </jsp:include>
                 </c:forEach>
 
@@ -155,12 +158,6 @@
                     </tr>
                     </tbody>
                 </table>
-                <div class="form-group row" style="margin-top: 30px">
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-info btn-sm">Guardar</button>
-                        <a href="/gastocomun/${gastocomun.id}/prorratear" class="btn btn-dark btn-sm">Prorratear</a>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -172,6 +169,7 @@
                 <c:set var="pagos" value="${boletaPagos}" scope="request"/>
                 <jsp:include flush="true" page="partials/_gastocomun_item_unplug_table.jsp">
                     <jsp:param name="viewTipo" value="boleta"/>
+                    <jsp:param name="viewContainer" value="gastocomun"/>
                 </jsp:include>
             </div>
         </div>
@@ -184,6 +182,7 @@
                 <c:set var="pagos" value="${personalPagos}" scope="request"/>
                 <jsp:include flush="true" page="partials/_gastocomun_item_unplug_table.jsp">
                     <jsp:param name="viewTipo" value="personal"/>
+                    <jsp:param name="viewContainer" value="gastocomun"/>
                 </jsp:include>
             </div>
         </div>

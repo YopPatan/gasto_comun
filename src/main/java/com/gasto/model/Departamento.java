@@ -13,6 +13,7 @@ public class Departamento {
     private double alicuota;
     private Collection<DepartamentoPago> departamentoPagos;
     private Collection<DepartamentoGasto> departamentoGastos;
+    private Collection<DepartamentoConsumo> departamentoConsumos;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -81,5 +82,14 @@ public class Departamento {
 
     public void setDepartamentoGastos(Collection<DepartamentoGasto> departamentoGastos) {
         this.departamentoGastos = departamentoGastos;
+    }
+
+    @OneToMany(mappedBy = "departamento")
+    public Collection<DepartamentoConsumo> getDepartamentoConsumos() {
+        return departamentoConsumos;
+    }
+
+    public void setDepartamentoConsumos(Collection<DepartamentoConsumo> departamentoConsumos) {
+        this.departamentoConsumos = departamentoConsumos;
     }
 }

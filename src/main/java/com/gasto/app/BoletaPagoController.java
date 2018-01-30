@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
-import java.text.ParseException;
 
 @Controller
 @RequestMapping("/cuenta/{cuentaId}/boletaPago")

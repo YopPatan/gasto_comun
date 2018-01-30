@@ -24,6 +24,8 @@
       <mapping class="com.gasto.model.PersonalItem"/>
       <mapping class="com.gasto.model.PersonalTurno"/>
       <mapping class="com.gasto.app.Gastocomun"/>
+      <mapping class="com.gasto.model.Consumo"/>
+      <mapping class="com.gasto.model.DepartamentoConsumo"/>
 
       <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->

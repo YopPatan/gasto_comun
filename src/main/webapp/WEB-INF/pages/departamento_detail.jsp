@@ -20,13 +20,13 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/resources/css/main.css" />
 
     <script>
-/*        function loadBoletaModal(url) {
+        function loadDepartamentoGastoModal(url) {
             $.get(url, function (data) {
-                $("#boletaModalContent").children().remove();
-                $("#boletaModalContent").append(data);
-                $('#boletaModal').modal();
+                $("#departamentoGastoModalContent").children().remove();
+                $("#departamentoGastoModalContent").append(data);
+                $('#departamentoGastoModal').modal();
             });
-        }*/
+        }
 
         function loadDepartamentoPagoModal(url) {
             $.get(url, function (data) {
@@ -58,7 +58,6 @@
             Gastos
         </div>
         <div class="card-body">
-            <button type="button" onclick="loadDepartamentoGastoModal('/departamento/${departamento.id}/gasto/new')" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</button>
             <jsp:include page="partials/_departamento_gasto_table.jsp" />
         </div>
     </div>

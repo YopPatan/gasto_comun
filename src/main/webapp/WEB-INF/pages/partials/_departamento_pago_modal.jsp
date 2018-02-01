@@ -16,13 +16,13 @@
                     <div class="form-group row">
                         <label for="departamento_pago_fecha" class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
                         <div class="col-sm-9">
-                            <input type="date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${personalPago.fecha}" />" class="form-control form-control-sm" id="departamento_pago_fecha" name="departamento_pago_fecha" required />
+                            <input type="date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${departamentoPago.fecha}" />" class="form-control form-control-sm" id="departamento_pago_fecha" name="departamento_pago_fecha" required />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="departamento_pago_monto" class="col-sm-3 col-form-label col-form-label-sm">Monto</label>
                         <div class="col-sm-9">
-                            <input value="${personalPago.monto}" class="form-control form-control-sm" id="departamento_pago_monto" name="departamento_pago_monto" required />
+                            <input value="${departamentoPago.monto}" class="form-control form-control-sm" id="departamento_pago_monto" name="departamento_pago_monto" required data-parsley-type="number" />
                         </div>
                     </div>
                 </div>
@@ -34,3 +34,6 @@
         </form:form>
     </div>
 </div>
+<script>
+    configParsley();
+</script>

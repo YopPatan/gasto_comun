@@ -10,31 +10,31 @@
     <div class="form-group row">
         <label for="personal_rut" class="col-sm-2 col-form-label col-form-label-sm">Rut</label>
         <div class="col-sm-10">
-            <input value="${personal.rut}" class="form-control form-control-sm" id="personal_rut" name="personal_rut" />
+            <input value="${personal.rut}" class="form-control form-control-sm" id="personal_rut" name="personal_rut" required data-parsley-is-rut />
         </div>
     </div>
     <div class="form-group row">
         <label for="personal_nombres" class="col-sm-2 col-form-label col-form-label-sm">Nombres</label>
         <div class="col-sm-10">
-            <input value="${personal.nombres}" class="form-control form-control-sm" id="personal_nombres" name="personal_nombres" />
+            <input value="${personal.nombres}" class="form-control form-control-sm" id="personal_nombres" name="personal_nombres" required data-parsley-type="alphanum" data-parsley-minlength="3" />
         </div>
     </div>
     <div class="form-group row">
         <label for="personal_apellidos" class="col-sm-2 col-form-label col-form-label-sm">Apellidos</label>
         <div class="col-sm-10">
-            <input value="${personal.apellidos}" class="form-control form-control-sm" id="personal_apellidos" name="personal_apellidos" />
+            <input value="${personal.apellidos}" class="form-control form-control-sm" id="personal_apellidos" name="personal_apellidos" required data-parsley-type="alphanum" data-parsley-minlength="3" />
         </div>
     </div>
     <div class="form-group row">
         <label for="personal_direccion" class="col-sm-2 col-form-label col-form-label-sm">Dirección</label>
         <div class="col-sm-10">
-            <input value="${personal.direccion}" class="form-control form-control-sm" id="personal_direccion" name="personal_direccion" />
+            <input value="${personal.direccion}" class="form-control form-control-sm" id="personal_direccion" name="personal_direccion" required data-parsley-minlength="3" />
         </div>
     </div>
     <div class="form-group row">
         <label for="personal_cargo" class="col-sm-2 col-form-label col-form-label-sm">Cargo</label>
         <div class="col-sm-10">
-            <input value="${personal.cargo}" class="form-control form-control-sm" id="personal_cargo" name="personal_cargo" />
+            <input value="${personal.cargo}" class="form-control form-control-sm" id="personal_cargo" name="personal_cargo" required type="alphanum" data-parsley-minlength="3" />
         </div>
     </div>
     <div class="form-group row">

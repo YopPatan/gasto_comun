@@ -10,7 +10,7 @@
     <div class="form-group row">
         <label for="cuenta_nombre" class="col-sm-2 col-form-label col-form-label-sm">Nombre</label>
         <div class="col-sm-10">
-            <input value="${cuenta.nombre}" class="form-control form-control-sm" id="cuenta_nombre" name="cuenta_nombre" required />
+            <input value="${cuenta.nombre}" class="form-control form-control-sm" id="cuenta_nombre" name="cuenta_nombre" required data-parsley-minlength="3" />
         </div>
     </div>
     <div class="form-group row">

@@ -28,13 +28,13 @@
                     <div class="form-group row">
                         <label for="boleta_adjunto" class="col-sm-3 col-form-label col-form-label-sm">Adjunto</label>
                         <div class="col-sm-9">
-                            <input value="${boleta.adjunto}" class="form-control form-control-sm" id="boleta_adjunto" name="boleta_adjunto" />
+                            <input value="${boleta.adjunto}" class="form-control form-control-sm" id="boleta_adjunto" name="boleta_adjunto" data-parsley-type="url" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="boleta_monto" class="col-sm-3 col-form-label col-form-label-sm">Monto</label>
                         <div class="col-sm-9">
-                            <input value="${boleta.monto}" class="form-control form-control-sm" id="boleta_monto" name="boleta_monto" required />
+                            <input value="${boleta.monto}" class="form-control form-control-sm" id="boleta_monto" name="boleta_monto" required data-parsley-type="number" />
                         </div>
                     </div>
                 </div>
@@ -46,3 +46,6 @@
         </form:form>
     </div>
 </div>
+<script>
+    configParsley();
+</script>

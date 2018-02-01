@@ -22,6 +22,16 @@
     padding-right: 20px;
 }
 
+.parsley-errors-list {
+    float: left;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+    margin-bottom: 0px;
+    margin-left: -20px;
+}
+
 @media (min-width: 992px) {
     .modal-lg-aux {
         max-width: 950px !important;

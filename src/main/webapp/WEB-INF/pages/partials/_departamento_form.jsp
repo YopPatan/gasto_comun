@@ -18,13 +18,13 @@
     <div class="form-group row">
         <label for="departamento_propietario" class="col-sm-2 col-form-label col-form-label-sm">Propietario</label>
         <div class="col-sm-10">
-            <input value="${departamento.propietario}" class="form-control form-control-sm" id="departamento_propietario" name="departamento_propietario" />
+            <input value="${departamento.propietario}" class="form-control form-control-sm" id="departamento_propietario" name="departamento_propietario" data-parsley-type="alphanum" data-parsley-minlength="3" />
         </div>
     </div>
     <div class="form-group row">
         <label for="departamento_residente" class="col-sm-2 col-form-label col-form-label-sm">Residente</label>
         <div class="col-sm-10">
-            <input value="${departamento.residente}" class="form-control form-control-sm" id="departamento_residente" name="departamento_residente" />
+            <input value="${departamento.residente}" class="form-control form-control-sm" id="departamento_residente" name="departamento_residente" data-parsley-type="alphanum" data-parsley-minlength="3" />
         </div>
     </div>
     <div class="form-group row">

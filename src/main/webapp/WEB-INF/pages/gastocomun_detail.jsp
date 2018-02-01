@@ -18,6 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.0/parsley.min.js"></script>
+    <script src="/resources/js/validacion.js"></script>
 
     <link rel="stylesheet" type="text/css" media="screen" href="/resources/css/main.css" />
 
@@ -117,7 +119,7 @@
             <div class="card-header">Detalle</div>
             <div class="card-body">
                 <c:set var="pagos" value="${personalPagos}" scope="request"/>
-                <jsp:include flush="true" page="partials/_gastocomun_item_plug_table.jsp">
+                <jsp:include flush="true" page="partials/_x_pago_table_plug.jsp">
                     <jsp:param name="tipoNombre" value="Gastos de Administración"/>
                     <jsp:param name="tipoId" value="0"/>
                     <jsp:param name="viewTipo" value="personal"/>
@@ -126,7 +128,7 @@
 
                 <c:forEach var="cuentaTipo" items="${cuentaTipos}">
                     <c:set var="pagos" value="${boletaPagosByTipo.get(cuentaTipo.key)}" scope="request"/>
-                    <jsp:include flush="true" page="partials/_gastocomun_item_plug_table.jsp">
+                    <jsp:include flush="true" page="partials/_x_pago_table_plug.jsp">
                         <jsp:param name="tipoNombre" value="${cuentaTipo.value}"/>
                         <jsp:param name="tipoId" value="${cuentaTipo.key}"/>
                         <jsp:param name="viewTipo" value="boleta"/>
@@ -167,7 +169,7 @@
             </div>
             <div class="card-body">
                 <c:set var="pagos" value="${boletaPagos}" scope="request"/>
-                <jsp:include flush="true" page="partials/_gastocomun_item_unplug_table.jsp">
+                <jsp:include flush="true" page="partials/_x_pago_table_unplug.jsp">
                     <jsp:param name="viewTipo" value="boleta"/>
                     <jsp:param name="viewContainer" value="gastocomun"/>
                 </jsp:include>
@@ -180,7 +182,7 @@
             </div>
             <div class="card-body">
                 <c:set var="pagos" value="${personalPagos}" scope="request"/>
-                <jsp:include flush="true" page="partials/_gastocomun_item_unplug_table.jsp">
+                <jsp:include flush="true" page="partials/_x_pago_table_unplug.jsp">
                     <jsp:param name="viewTipo" value="personal"/>
                     <jsp:param name="viewContainer" value="gastocomun"/>
                 </jsp:include>

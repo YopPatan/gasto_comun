@@ -73,13 +73,13 @@
                     <div class="form-group row">
                         <label for="personal_pago_adjunto" class="col-sm-3 col-form-label col-form-label-sm">Adjunto</label>
                         <div class="col-sm-9">
-                            <input value="${personalPago.adjunto}" class="form-control form-control-sm" id="personal_pago_adjunto" name="personal_pago_adjunto" />
+                            <input value="${personalPago.adjunto}" class="form-control form-control-sm" id="personal_pago_adjunto" name="personal_pago_adjunto" data-parsley-type="url" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="personal_pago_monto" class="col-sm-3 col-form-label col-form-label-sm">Monto</label>
                         <div class="col-sm-9">
-                            <input value="${personalPago.monto}" class="form-control form-control-sm" id="personal_pago_monto" name="personal_pago_monto" required />
+                            <input value="${personalPago.monto}" class="form-control form-control-sm" id="personal_pago_monto" name="personal_pago_monto" required data-parsley-type="number" />
                         </div>
                     </div>
                 </div>
@@ -91,3 +91,6 @@
         </form:form>
     </div>
 </div>
+<script>
+    configParsley();
+</script>

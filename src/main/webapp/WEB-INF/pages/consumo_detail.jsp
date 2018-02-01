@@ -18,6 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.0/parsley.min.js"></script>
+    <script src="/resources/js/validacion.js"></script>
 
     <link rel="stylesheet" type="text/css" media="screen" href="/resources/css/main.css" />
 
@@ -74,7 +76,7 @@
                 <div class="form-group row">
                     <label for="consumo_nombre" class="col-sm-2 col-form-label col-form-label-sm">Nombre</label>
                     <div class="col-sm-10">
-                        <input value="${consumo.nombre}" class="form-control form-control-sm" id="consumo_nombre" name="consumo_nombre" required />
+                        <input value="${consumo.nombre}" class="form-control form-control-sm" id="consumo_nombre" name="consumo_nombre" required data-parsley-type="alphanum" data-parsley-minlength="3" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -86,7 +88,7 @@
                 <div class="form-group row">
                     <label for="consumo_cantidad" class="col-sm-2 col-form-label col-form-label-sm">Cantidad</label>
                     <div class="col-sm-10">
-                        <input value="${consumo.cantidad}" class="form-control form-control-sm" id="consumo_cantidad" name="consumo_cantidad" />
+                        <input value="${consumo.cantidad}" class="form-control form-control-sm" id="consumo_cantidad" name="consumo_cantidad" required data-parsley-type="number" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -116,7 +118,7 @@
                                 <c:forEach var="departamentoConsumo" items="${departamentoGrupo}" varStatus="loop">
                                     <tr>
                                         <td class="form-control-noinput">${departamentoConsumo.departamento.nombre}</td>
-                                        <td><input type="text" name="departamento_${departamentoConsumo.departamento.id}_${departamentoConsumo.id}_consumo" value="${departamentoConsumo.cantidad}" class="form-control form-control-sm"></td>
+                                        <td><input type="text" name="departamento_${departamentoConsumo.departamento.id}_${departamentoConsumo.id}_consumo" value="${departamentoConsumo.cantidad}" class="form-control form-control-sm" data-parsley-type="number"></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -131,7 +133,7 @@
             <div class="card-header">Detalle</div>
             <div class="card-body">
                 <c:set var="pagos" value="${boletaPagos}" scope="request"/>
-                <jsp:include flush="true" page="partials/_gastocomun_item_plug_table.jsp">
+                <jsp:include flush="true" page="partials/_x_pago_table_plug.jsp">
                     <jsp:param name="tipoNombre" value="Boletas Consumo"/>
                     <jsp:param name="tipoId" value="0"/>
                     <jsp:param name="viewTipo" value="boleta"/>
@@ -146,7 +148,7 @@
             </div>
             <div class="card-body">
                 <c:set var="pagos" value="${boletaPagos}" scope="request"/>
-                <jsp:include flush="true" page="partials/_gastocomun_item_unplug_table.jsp">
+                <jsp:include flush="true" page="partials/_x_pago_table_unplug.jsp">
                     <jsp:param name="viewTipo" value="boleta"/>
                     <jsp:param name="viewContainer" value="consumo"/>
                 </jsp:include>

@@ -15,7 +15,7 @@
                     <div class="form-group row">
                         <label for="personal_item_nombre" class="col-sm-3 col-form-label col-form-label-sm">Nombre</label>
                         <div class="col-sm-9">
-                            <input value="${personalItem.nombre}" class="form-control form-control-sm" id="personal_item_nombre" name="personal_item_nombre" />
+                            <input value="${personalItem.nombre}" class="form-control form-control-sm" id="personal_item_nombre" name="personal_item_nombre" required data-parsley-type="alphanum" data-parsley-minlength="3" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -38,7 +38,7 @@
                                     <input type="radio" name="personal_es_porcentaje" value="0" autocomplete="off" ${personalItem.esPorcentaje == 0 ? "checked" : ""} required />No
                                 </label>
                                 <label class="btn btn-secondary ${personalItem.esPorcentaje == 1 ? "active" : ""}">
-                                    <input type="radio" name="personal_es_porcentaje" value="1" autocomplete="off" ${personalItem.esPorcentaje == 1 ? "checked" : ""} required />Si
+                                    <input type="radio" name="personal_es_porcentaje" value="1" autocomplete="off" ${personalItem.esPorcentaje == 1 ? "checked" : ""} />Si
                                 </label>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                     <div class="form-group row">
                         <label for="personal_item_monto" class="col-sm-3 col-form-label col-form-label-sm">Monto</label>
                         <div class="col-sm-9">
-                            <input value="${personalItem.monto}" class="form-control form-control-sm" id="personal_item_monto" name="personal_item_monto" />
+                            <input value="${personalItem.monto}" class="form-control form-control-sm" id="personal_item_monto" name="personal_item_monto" required data-parsley-type="number" />
                         </div>
                     </div>
                 </div>
@@ -58,3 +58,6 @@
         </form:form>
     </div>
 </div>
+<script>
+    configParsley();
+</script>

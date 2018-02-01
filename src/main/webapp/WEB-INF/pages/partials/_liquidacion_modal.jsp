@@ -79,7 +79,7 @@
                                     <label class="col-sm-4 col-form-label col-form-label-sm">${personal.cargo}</label>
                                     <label for="liquidacion_dias_trabajados" class="col-sm-2 col-form-label col-form-label-sm">Días Pagados</label>
                                     <div class="col-sm-4">
-                                        <input value="${liquidacion.diasTrabajados}" id="liquidacion_dias_trabajados" name="liquidacion_dias_trabajados" class="form-control form-control-sm" required />
+                                        <input value="${liquidacion.diasTrabajados}" id="liquidacion_dias_trabajados" name="liquidacion_dias_trabajados" class="form-control form-control-sm" required data-parsley-type="number" data-parsley-max="31" />
                                     </div>
                                 </div>
                             </li>
@@ -98,8 +98,8 @@
                                             <c:forEach var="item" items="${itemImponibles}" varStatus="loop">
                                                 <tr>
                                                     <th width="50" scope="row" class="form-control-noinput">${loop.index + 1}</th>
-                                                    <td><input value="${item.nombre}" name="item_1_${item.id}" class="form-control form-control-sm" /></td>
-                                                    <td><input value="${item.monto}" data-type="1" name="item_1_${item.id}_monto" onchange="loadTotales();" class="form-control form-control-sm" /></td>
+                                                    <td><input value="${item.nombre}" name="item_1_${item.id}" class="form-control form-control-sm" required data-parsley-type="alphanum" data-parsley-minlength="3" /></td>
+                                                    <td><input value="${item.monto}" data-type="1" name="item_1_${item.id}_monto" onchange="loadTotales();" class="form-control form-control-sm" required data-parsley-type="number" /></td>
                                                 </tr>
                                             </c:forEach>
 
@@ -122,8 +122,8 @@
                                             <c:forEach var="item" items="${itemNoImponibles}" varStatus="loop">
                                                 <tr>
                                                     <th width="50" scope="row" class="form-control-noinput">${loop.index + 1}</th>
-                                                    <td><input value="${item.nombre}" name="item_2_${item.id}" class="form-control form-control-sm" /></td>
-                                                    <td><input value="${item.monto}" data-type="2" name="item_2_${item.id}_monto" onchange="loadTotales();" class="form-control form-control-sm" /></td>
+                                                    <td><input value="${item.nombre}" name="item_2_${item.id}" class="form-control form-control-sm" required data-parsley-type="alphanum" data-parsley-minlength="3" /></td>
+                                                    <td><input value="${item.monto}" data-type="2" name="item_2_${item.id}_monto" onchange="loadTotales();" class="form-control form-control-sm" required data-parsley-type="number" /></td>
                                                 </tr>
                                             </c:forEach>
 
@@ -149,13 +149,13 @@
                                                 <c:set var = "indexPrev" scope = "session" value = "${loop.index + 1}"/>
                                                 <tr>
                                                     <th width="50" scope="row" class="form-control-noinput">${loop.index + 1}</th>
-                                                    <td><input value="${item.nombre}" name="item_3_${item.id}" class="form-control form-control-sm" /></td>
+                                                    <td><input value="${item.nombre}" name="item_3_${item.id}" class="form-control form-control-sm" required data-parsley-type="alphanum" data-parsley-minlength="3" /></td>
                                                     <td>
                                                         <c:if test="${item.esPorcentaje==1}">
-                                                            <input value="" data-percent="${item.monto}" data-type="3" name="item_3_${item.id}_monto" onchange="$(this).attr('data-percent', 0); loadTotales();" class="form-control form-control-sm" />
+                                                            <input value="" data-percent="${item.monto}" data-type="3" name="item_3_${item.id}_monto" onchange="$(this).attr('data-percent', 0); loadTotales();" class="form-control form-control-sm" required data-parsley-type="number" />
                                                         </c:if>
                                                         <c:if test="${item.esPorcentaje==0}">
-                                                            <input value="${item.monto}" data-percent="0" data-type="3" name="item_3_${item.id}_monto" onchange="loadTotales();" class="form-control form-control-sm" />
+                                                            <input value="${item.monto}" data-percent="0" data-type="3" name="item_3_${item.id}_monto" onchange="loadTotales();" class="form-control form-control-sm" required data-parsley-type="number" />
                                                         </c:if>
                                                     </td>
                                                 </tr>
@@ -210,4 +210,5 @@
 </div>
 <script>
     loadTotales();
+    configParsley();
 </script>

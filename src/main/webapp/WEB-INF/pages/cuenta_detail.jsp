@@ -48,6 +48,7 @@
     <jsp:param name="selected" value="cuenta"/>
 </jsp:include>
 <jsp:include page="partials/_attached_modal.jsp" />
+<jsp:include page="partials/_delete_modal.jsp" />
 
 <div class="container">
     <div class="card" style="margin-bottom: 20px">

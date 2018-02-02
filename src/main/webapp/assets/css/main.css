@@ -32,6 +32,13 @@
     margin-left: -20px;
 }
 
+.login {
+    width: 500px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media (min-width: 992px) {
     .modal-lg-aux {
         max-width: 950px !important;

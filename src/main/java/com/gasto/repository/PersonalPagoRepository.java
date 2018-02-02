@@ -9,4 +9,5 @@ public interface PersonalPagoRepository extends CrudRepository<PersonalPago, Int
     List<PersonalPago> findByPersonalId(Integer personalId);
     List<PersonalPago> findByPersonalIdAndLiquidacionIdAndTipo(Integer personalId, Integer liquidacionId, Integer tipo);
     List<PersonalPago> findByGastocomunId(Integer gastocomunId);
+    List<PersonalPago> findByLiquidacionId(Integer liquidacionId);
 }

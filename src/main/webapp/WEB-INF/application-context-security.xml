@@ -1,0 +1,42 @@
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd
+    ">
+
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/login.jsp" access="permitAll" />
+        <security:intercept-url pattern="/resources/**" access="permitAll" />
+        <security:intercept-url pattern="/**" access="hasAuthority('ADMIN')" />
+
+        <!-- CONFIGURACION DE FORMULARIO LOGIN -->
+        <security:form-login
+                login-page='/login.jsp'
+                default-target-url="/gastocomun"
+                authentication-failure-url="/login.jsp?error"
+                always-use-default-target="true"/>
+
+        <!-- SE CREA PATH /logout AUTOMATICO -->
+        <security:logout />
+        <security:csrf disabled="true"/>
+
+        <!--<security:access-denied-handler error-page="/403" />-->
+
+    </security:http>
+
+    <!-- CONFIGURAR username / password / role -->
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:password-encoder hash="bcrypt" />
+            <security:jdbc-user-service data-source-ref="dataSource"
+                users-by-username-query="SELECT username, password, enabled FROM adm_usuario WHERE username=?"
+                authorities-by-username-query="SELECT username, role FROM adm_usuario WHERE username=?" />
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+</beans>

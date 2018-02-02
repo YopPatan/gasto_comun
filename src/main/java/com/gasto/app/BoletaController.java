@@ -2,6 +2,7 @@ package com.gasto.app;
 
 import com.gasto.model.Boleta;
 import com.gasto.model.Cuenta;
+import com.gasto.repository.BoletaPagoRepository;
 import com.gasto.repository.BoletaRepository;
 import com.gasto.repository.CuentaRepository;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class BoletaController {
 
     @Resource
     private BoletaRepository boletaRepository;
+
+    @Resource
+    private BoletaPagoRepository boletaPagoRepository;
 
     @Resource
     private CuentaRepository cuentaRepository;
@@ -60,9 +64,19 @@ public class BoletaController {
     }
 
     @RequestMapping("/delete/{boletaId}")
-    public String delete(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaId") Integer boletaId) {
+    public String delete(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaId") Integer boletaId, Model model) {
         Boleta boleta = boletaRepository.findById(boletaId).get();
-        boletaRepository.delete(boleta);
-        return "redirect:/cuenta/edit/" + cuentaId;
+        int boletaPagoCnt = boletaPagoRepository.findByBoletaId(boletaId).size();
+
+        if (boletaPagoCnt > 0) {
+            model.addAttribute("errorTitulo", "No se puede eliminar la Boleta");
+            model.addAttribute("errorDescripcion", "La boleta tiene pagos asociadas, no puede ser eliminada.");
+            model.addAttribute("errorUrl", "/cuenta/edit/" + cuentaId);
+            return "error";
+        }
+        else {
+            boletaRepository.delete(boleta);
+            return "redirect:/cuenta/edit/" + cuentaId;
+        }
     }
 }

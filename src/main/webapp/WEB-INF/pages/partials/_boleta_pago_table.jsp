@@ -27,7 +27,7 @@
             </td>
             <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${boletaPago.monto}" /></td>
             <td><button onclick="loadBoletaPagoModal('/cuenta/${cuenta.id}/boletaPago/edit/${boletaPago.id}')" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
-            <td><a href="/cuenta/${cuenta.id}/boleta/delete/${boleta.id}" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+            <td><button onclick="openDeleteModal('/cuenta/${cuenta.id}/boletaPago/delete/${boletaPago.id}', 'Pago');" class="btn btn-outline-info btn-sm-aux"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
         </tr>
     </c:forEach>
 

@@ -73,9 +73,21 @@ public class PersonalController {
     }
 
     @RequestMapping("/delete/{personalId}")
-    public String delete(@PathVariable("personalId") Integer personalId) {
+    public String delete(@PathVariable("personalId") Integer personalId, Model model) {
         Personal personal = personalRepository.findById(personalId).get();
-        personalRepository.delete(personal);
-        return "redirect:/personal";
+        //int personalItemCnt = personalItemRepository.findByPersonalId(personalId).size();
+        int personalPagoCnt = personalPagoRepository.findByPersonalId(personalId).size();
+        int liquidacionCnt = liquidacionRepository.findByPersonalId(personalId).size();
+
+        if (personalPagoCnt > 0 || liquidacionCnt > 0) {
+            model.addAttribute("errorTitulo", "No se puede eliminar el Personal");
+            model.addAttribute("errorDescripcion", "El personal tiene elementos asociadas, no puede ser eliminado.");
+            model.addAttribute("errorUrl", "/personal");
+            return "error";
+        }
+        else {
+            personalRepository.delete(personal);
+            return "redirect:/personal";
+        }
     }
 }

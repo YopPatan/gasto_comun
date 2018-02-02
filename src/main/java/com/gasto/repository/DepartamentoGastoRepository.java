@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface DepartamentoGastoRepository extends CrudRepository<DepartamentoGasto, Integer> {
     List<DepartamentoGasto> findByDepartamentoId(Integer departamentoId);
+    List<DepartamentoGasto> findByGastocomunId(Integer gastocomunId);
 
     @Query(value = "SELECT COALESCE(SUM(monto_total), 0) FROM departamento_gasto WHERE departamento_id = ?1", nativeQuery = true)
     int getSumMontoByDepartamentoId(Integer departamentoId);

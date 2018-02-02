@@ -116,10 +116,19 @@ public class LiquidacionController {
     }
 
     @RequestMapping("/delete/{liquidacionId}")
-    public String delete(@PathVariable("personalId") Integer personalId, @PathVariable("liquidacionId") Integer liquidacionId) {
+    public String delete(@PathVariable("personalId") Integer personalId, @PathVariable("liquidacionId") Integer liquidacionId, Model model) {
         Liquidacion liquidacion = liquidacionRepository.findById(liquidacionId).get();
-        liquidacionRepository.delete(liquidacion);
-        return "redirect:/personal/edit/" + personalId;
+        int personalPagoCnt = personalPagoRepository.findByLiquidacionId(liquidacionId).size();
+        if (personalPagoCnt > 0) {
+            model.addAttribute("errorTitulo", "No se puede eliminar la Liquidación");
+            model.addAttribute("errorDescripcion", "La liquidación tiene pagos asociadas, no puede ser eliminado.");
+            model.addAttribute("errorUrl", "/personal/edit/" + personalId);
+            return "error";
+        }
+        else {
+            liquidacionRepository.delete(liquidacion);
+            return "redirect:/personal/edit/" + personalId;
+        }
     }
 
 }

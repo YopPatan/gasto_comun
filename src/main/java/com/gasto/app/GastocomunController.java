@@ -98,6 +98,7 @@ public class GastocomunController {
         }
 
         gastocomun.setMontoComun(Integer.parseInt(request.getParameter("gastocomun_monto_comun")));
+        gastocomun.setMontoNoComun(Integer.parseInt(request.getParameter("gastocomun_monto_no_comun")));
         gastocomun.setMontoReserva(Integer.parseInt(request.getParameter("gastocomun_monto_reserva")));
         gastocomun.setMontoTotal(Integer.parseInt(request.getParameter("gastocomun_monto_total")));
         gastocomun.setFecha(Timestamp.valueOf(request.getParameter("gastocomun_fecha") + " 00:00:00"));
@@ -146,10 +147,22 @@ public class GastocomunController {
     }
 
     @RequestMapping("/delete/{gastocomunId}")
-    public String delete(@PathVariable("gastocomunId") Integer gastocomunId) {
+    public String delete(@PathVariable("gastocomunId") Integer gastocomunId, Model model) {
         Gastocomun gastocomun = gastocomunRepository.findById(gastocomunId).get();
-        gastocomunRepository.delete(gastocomun);
-        return "redirect:/gastocomun";
+        int boletaPagoCnt = boletaPagoRepository.findByGastocomunId(gastocomunId).size();
+        int personalPagoCnt = personalPagoRepository.findByGastocomunId(gastocomunId).size();
+        int departamentoGastoCnt = departamentoGastoRepository.findByGastocomunId(gastocomunId).size();
+
+        if (boletaPagoCnt > 0 || personalPagoCnt > 0 || departamentoGastoCnt > 0) {
+            model.addAttribute("errorTitulo", "No se puede eliminar el Gasto Comun");
+            model.addAttribute("errorDescripcion", "El gasto comun tiene elementos asociados, no puede ser eliminado.");
+            model.addAttribute("errorUrl", "/gastocomun");
+            return "error";
+        }
+        else {
+            gastocomunRepository.delete(gastocomun);
+            return "redirect:/gastocomun";
+        }
     }
 
     @RequestMapping("/prorratear/{gastocomunId}")
@@ -161,8 +174,7 @@ public class GastocomunController {
             int montoGastos = departamentoGastoRepository.getSumMontoByDepartamentoId(departamento.getId());
             int montoPagos = departamentoPagoRepository.getSumMontoByDepartamentoId(departamento.getId());
             int montoNoComun = departamentoConsumoRepository.getSumMontoByDepartamentoIdAndGastocomunId(departamento.getId(), gastocomun.getId());
-            //System.out.println(montoGastos);
-            //System.out.println(montoPagos);
+
             DepartamentoGasto departamentoGasto = new DepartamentoGasto();
             departamentoGasto.setDepartamento(departamento);
             departamentoGasto.setGastocomun(gastocomun);

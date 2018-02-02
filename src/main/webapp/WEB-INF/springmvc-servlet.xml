@@ -13,10 +13,14 @@
     ">
 
     <!--<mvc:default-servlet-handler/>-->
-    <mvc:annotation-driven/>
+    <!--<context:annotation-config/>-->
+
+    <mvc:annotation-driven/>  <!-- QUE HACE ESTO? -->
+
+    <!-- CONFIGURAR ASSETS -->
     <mvc:resources mapping="/resources/**" location="/assets/" cache-period="31556926"/>
 
-    <!--<context:annotation-config/>-->
+    <!-- UBICACION CONTROLLER -->
     <context:component-scan base-package="com.gasto.app"/>
 
     <!-- CONFIGURACION DE TEMPLATES -->

@@ -4,6 +4,7 @@ import com.gasto.model.Boleta;
 import com.gasto.model.BoletaPago;
 import com.gasto.repository.BoletaPagoRepository;
 import com.gasto.repository.BoletaRepository;
+import com.gasto.repository.GastocomunRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,9 @@ public class BoletaPagoController {
 
     @Resource
     private BoletaRepository boletaRepository;
+
+    @Resource
+    private GastocomunRepository gastocomunRepository;
 
     @RequestMapping("/new")
     public String create(@PathVariable("cuentaId") Integer cuentaId, Model model) {
@@ -63,10 +67,18 @@ public class BoletaPagoController {
     }
 
     @RequestMapping("/delete/{boletaPagoId}")
-    public String delete(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaPagoId") Integer boletaPagoId) {
+    public String delete(@PathVariable("cuentaId") Integer cuentaId, @PathVariable("boletaPagoId") Integer boletaPagoId, Model model) {
         BoletaPago boletaPago = boletaPagoRepository.findById(boletaPagoId).get();
-        boletaPagoRepository.delete(boletaPago);
-        return "redirect:/cuenta/edit/" + cuentaId;
+        if (boletaPago.getGastocomun() != null) {
+            model.addAttribute("errorTitulo", "No se puede eliminar el Pago");
+            model.addAttribute("errorDescripcion", "El pago esta asociado a un Gasto Comun, no puede ser eliminado.");
+            model.addAttribute("errorUrl", "/cuenta/edit/" + cuentaId);
+            return "error";
+        }
+        else {
+            boletaPagoRepository.delete(boletaPago);
+            return "redirect:/cuenta/edit/" + cuentaId;
+        }
     }
 
 }

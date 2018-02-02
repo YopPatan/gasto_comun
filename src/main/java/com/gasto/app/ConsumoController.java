@@ -129,10 +129,18 @@ public class ConsumoController {
     }
 
     @RequestMapping("/delete/{consumoId}")
-    public String delete(@PathVariable("consumoId") Integer consumoId) {
+    public String delete(@PathVariable("consumoId") Integer consumoId, Model model) {
         Consumo consumo = consumoRepository.findById(consumoId).get();
-        consumoRepository.delete(consumo);
-        return "redirect:/consumo";
+        if (consumo.getGastocomun() != null) {
+            model.addAttribute("errorTitulo", "No se puede eliminar el Consumo");
+            model.addAttribute("errorDescripcion", "El consumo esta asociado a un Gasto Común, no puede ser eliminada.");
+            model.addAttribute("errorUrl", "/consumo");
+            return "error";
+        }
+        else {
+            consumoRepository.delete(consumo);
+            return "redirect:/consumo";
+        }
     }
 
     private static List<List<DepartamentoConsumo>> subListDepartamentos(List<DepartamentoConsumo> departamentoConsumos, int count) {

@@ -24,5 +24,8 @@
                 </div>
             </li>
         </ul>
+        <form class="form-inline" style="margin: 0px;">
+            <a href="/logout" class="btn btn-outline-info my-2 my-sm-0">Logout</a>
+        </form>
     </div>
 </nav>

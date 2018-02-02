@@ -66,9 +66,19 @@ public class CuentaController {
     }
 
     @RequestMapping("/delete/{cuentaId}")
-    public String delete(@PathVariable("cuentaId") Integer cuentaId) {
+    public String delete(@PathVariable("cuentaId") Integer cuentaId, Model model) {
         Cuenta cuenta = cuentaRepository.findById(cuentaId).get();
-        cuentaRepository.delete(cuenta);
-        return "redirect:/cuenta";
+        int boletaCnt = boletaRepository.findByCuentaId(cuentaId).size();
+
+        if (boletaCnt > 0) {
+            model.addAttribute("errorTitulo", "No se puede eliminar la Cuenta");
+            model.addAttribute("errorDescripcion", "La cuenta tiene boletas asociadas, no puede ser eliminada.");
+            model.addAttribute("errorUrl", "/cuenta");
+            return "error";
+        }
+        else {
+            cuentaRepository.delete(cuenta);
+            return "redirect:/cuenta";
+        }
     }
 }

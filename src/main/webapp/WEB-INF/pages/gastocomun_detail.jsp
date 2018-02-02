@@ -81,9 +81,10 @@
         <c:if test="${gastocomun != null}">
             <input type="hidden" name="gastocomun_id" value="${gastocomun.id}" />
         </c:if>
-        <input type="hidden" name="gastocomun_monto_comun" value="" />
-        <input type="hidden" name="gastocomun_monto_reserva" value="" />
-        <input type="hidden" name="gastocomun_monto_total" value="" />
+        <input type="hidden" name="gastocomun_monto_comun" value="0" />
+        <input type="hidden" name="gastocomun_monto_no_comun" value="0" />
+        <input type="hidden" name="gastocomun_monto_reserva" value="0" />
+        <input type="hidden" name="gastocomun_monto_total" value="0" />
 
         <div class="card" style="margin-bottom: 20px">
             <div class="card-header">Gasto Comun</div>

@@ -29,12 +29,10 @@
 
     <div class="container">
         <div class="card">
-            <div class="card-header">
-                Gastos Comunes
-            </div>
+            <div class="card-header">${errorTitulo}</div>
             <div class="card-body">
-                <a href="/gastocomun/new" class="btn btn-info btn-sm" style="margin-bottom: 1rem;">Agregar nuevo</a>
-                <jsp:include page="partials/_gastocomun_table.jsp" />
+                <p class="card-text">${errorDescripcion}</p>
+                <a href="${errorUrl}" class="btn btn-info btn-sm">Volver</a>
             </div>
         </div>
     </div>

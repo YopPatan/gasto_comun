@@ -80,9 +80,17 @@ public class PersonalPagoController {
     }
 
     @RequestMapping("/delete/{personalPagoId}")
-    public String delete(@PathVariable("personalId") Integer personalId, @PathVariable("personalPagoId") Integer personalPagoId) {
+    public String delete(@PathVariable("personalId") Integer personalId, @PathVariable("personalPagoId") Integer personalPagoId, Model model) {
         PersonalPago personalPago = personalPagoRepository.findById(personalPagoId).get();
-        personalPagoRepository.delete(personalPago);
-        return "redirect:/personal/edit/" + personalId;
+        if (personalPago.getGastocomun() != null) {
+            model.addAttribute("errorTitulo", "No se puede eliminar el Pago");
+            model.addAttribute("errorDescripcion", "El pago esta asociado a un Gasto Comun, no puede ser eliminado.");
+            model.addAttribute("errorUrl", "/personal/edit/" + personalId);
+            return "error";
+        }
+        else {
+            personalPagoRepository.delete(personalPago);
+            return "redirect:/personal/edit/" + personalId;
+        }
     }
 }

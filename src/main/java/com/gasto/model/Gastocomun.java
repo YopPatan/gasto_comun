@@ -12,6 +12,7 @@ public class Gastocomun {
     private Timestamp fechaVencimiento;
     private String observaciones;
     private int montoComun;
+    private int montoNoComun;
     private int montoReserva;
     private int montoTotal;
     private Collection<BoletaPago> boletaPagos;
@@ -71,6 +72,16 @@ public class Gastocomun {
     }
 
     @Basic
+    @Column(name = "monto_no_comun", nullable = false)
+    public int getMontoNoComun() {
+        return montoNoComun;
+    }
+
+    public void setMontoNoComun(int montoNoComun) {
+        this.montoNoComun = montoNoComun;
+    }
+
+    @Basic
     @Column(name = "monto_reserva", nullable = false)
     public int getMontoReserva() {
         return montoReserva;
@@ -125,4 +136,5 @@ public class Gastocomun {
     public void setConsumos(Collection<Consumo> consumos) {
         this.consumos = consumos;
     }
+
 }
